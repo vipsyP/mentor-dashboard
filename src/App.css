@@ -1,0 +1,104 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.container{
+  width: 70%;
+  margin: 0 auto;
+  transform: translateY(10% );
+}
+.header{
+  background-color: #424242;
+  text-align: center;
+  padding-bottom: 50px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  transform: translateY(10%);
+  font-size: 14px;
+  position: relative;
+}
+.header span{
+  position: absolute;
+  left: 395px;
+  top: 9px;
+  font-size: 1.5em;
+  color: white;
+}
+.mentorName{
+  background-color: #bebebe;
+  margin-top: 10px;
+  padding-bottom: 60px;
+  position: relative;
+}
+.mentorName span {
+  position: absolute;
+  left: 15px;
+  top: 21px;
+}
+form{
+  margin-top: 10px;
+}
+input{
+  border-radius: 5px;
+  padding-bottom: 11px;
+}
+.taskName{
+  width: 55%;
+  margin-right: 8px;
+}
+.teamMember{
+  width: 30%;
+  margin-right: 8px;
+}
+.submit{
+  width: 12%;
+  background-color: #eb4662;
+  font-size: 1em;
+}
+.lists{
+  margin-top: 10px;
+  display: block;
+}
+.taskList{
+  display: inline-block;
+  width: 49%;
+  margin-right: 2%
+}
+.review{
+  display: inline-block;
+  width: 49%;
+}
+.lists div{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 39px;
+  border-radius: 5px;
+  background-color:#eb4662;
+  padding-bottom: 15px;
+}
+
+
