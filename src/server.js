@@ -20,9 +20,10 @@ app.use(function(req, res, next) {
      member: String
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
+
 app.post("/addTask" , function(req,res){
     // console.log("task added");
-    console.log(req.body);
+    // console.log(req.body);
     var newTask = new tasks({
         task: req.body.taskName,
         member: req.body.teamMember
@@ -30,9 +31,21 @@ app.post("/addTask" , function(req,res){
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            console.log("inserted "+ newTask);
+            //console.log("inserted "+ newTask);
         }
     });
+});
+
+app.get("/showTasks" , function(req,res){
+    tasks.find({},function(err, tasksList){
+        if(err) console.log(err);
+        else{
+            // res.render("index.ejs" ,{todoList : todoList}); 
+            res.send(tasksList);
+            console.log(tasksList);
+        }
+    });
+    
 });
 
 

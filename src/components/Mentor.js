@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import ShowTasks from './ShowTasks.js'
 
 class Mentor extends Component {
     constructor(props){
         super(props);
         this.state={
-
+          show: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -12,7 +13,7 @@ class Mentor extends Component {
         console.log("working");
         // e.preventDefault();
         this.setState({
-            
+            show: true
         })
     }
     render() {
@@ -31,6 +32,7 @@ class Mentor extends Component {
             <div className="taskList">Assigned Tasks</div>
             <div className="review">Tasks ready for review</div>
           </div>
+          <ShowTasks/>
         </div>
       )
     }
