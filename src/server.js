@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
 
-app.post("/addTask" , function(req,res){
+app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
     // console.log(req.body);
     var newTask = new tasks({
@@ -31,12 +31,12 @@ app.post("/addTask" , function(req,res){
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            //console.log("inserted "+ newTask);
+            console.log("inserted "+ newTask);
         }
     });
 });
 
-app.get("/showTasks" , function(req,res){
+app.get("/mentor/tasks" , function(req,res){
     tasks.find({},function(err, tasksList){
         if(err) console.log(err);
         else{
@@ -45,7 +45,18 @@ app.get("/showTasks" , function(req,res){
             console.log(tasksList);
         }
     });
-    
+});
+app.get("/mentee/tasks" , function(req,res){
+    tasks.aggregate([{$match :{member: { $eq:("megha")} }},{$group: {_id: '$task'}}]).exec(function(err,result){
+        if(err){
+            console.log("error");
+        }
+        else{
+            console.log(result);
+            res.send(result);
+            console.log(result);
+        }
+    });
 });
 
 

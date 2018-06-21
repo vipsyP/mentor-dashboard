@@ -10,7 +10,7 @@ class ShowTasks extends Component {
        
     }
     componentWillMount(){
-        fetch('http://localhost:4000/showTasks')
+        fetch('http://localhost:4000/mentor/tasks')
         .then(function(response) {
             return response.json();
         })
@@ -21,7 +21,6 @@ class ShowTasks extends Component {
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         })
-        
     }
     getTasks(res){
         var taskList=[],members=[];
@@ -39,13 +38,15 @@ class ShowTasks extends Component {
     }
   render() {
     let taskList = this.state.tasks;
-    // let members = this.state.members;
-    console.log(this.state.tasks);
+    let members = this.state.members;
+    console.log(taskList);
         return(
             <div>{
-                taskList.forEach((item,i)=>{
-                    <div className="assignedTasks">{item}</div>
+                taskList.map((item,i)=>{
+                    console.log("inside map"+item);
+                    return <div className="assignedTasks">{item + "- Assigned to "+members[i]}</div>
                 })
+
             }
             </div>            
         )

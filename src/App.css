@@ -100,5 +100,22 @@ input{
   background-color:#eb4662;
   padding-bottom: 15px;
 }
-
-
+.assignedTasks{
+  background-color: #006666;
+  margin-top: 10px;
+  width: 49%;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  color: white; 
+}
+#menteeTasks{
+  background-color: #006666;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  color: white; 
+  text-align: center;
+}
