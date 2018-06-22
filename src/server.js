@@ -24,15 +24,14 @@ app.use(function(req, res, next) {
 app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
      console.log(req.body);
-     console.log(req.query);
     var newTask = new tasks({
         task: req.body.taskName,
-        member: req.query.member
+        member: req.body.teamMember
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            // console.log("inserted "+ newTask);
+            console.log("inserted "+ newTask);
         }
     });
 });
