@@ -5,7 +5,8 @@ class Mentee extends Component {
     constructor(props){
         super(props);
         this.state={
-            menteeTasks : []
+            menteeTasks : [],
+            dueDate : []
         }
     }
     // handleSubmit(e){
@@ -30,13 +31,15 @@ class Mentee extends Component {
     }
     getMenteeTasks(res){
         console.log(res);
-        var menteeTasks=[];
+        var menteeTasks=[],dueDate=[];
         res.forEach((item,i)=>{
-            menteeTasks.push(item._id);
+            menteeTasks.push(item.task);
+            dueDate.push(item.dueDate);
         })
         console.log(menteeTasks);
         this.setState({
-            menteeTasks : menteeTasks
+            menteeTasks : menteeTasks,
+            dueDate : dueDate
         })
         // ReactDOM.render(menteeTasks,document.getElementById(menteeTasks))
         // this.setState({
@@ -47,6 +50,7 @@ class Mentee extends Component {
     }
     render() {
         let menteeTaskList = this.state.menteeTasks;
+        let dueDate = this.state.dueDate;
         console.log(menteeTaskList);
       return (
         <div className="container">
@@ -57,7 +61,12 @@ class Mentee extends Component {
           </div>
           <div>{
               menteeTaskList.map((item,i)=>{
-                return <div id="menteeTasks">{item}</div>
+                return (
+                <div id="menteeTasks">
+                    <span>{item}</span>
+                    <span className="due_date">{dueDate[i]}</span>
+                </div>
+                )
               })
           }</div>
         </div>

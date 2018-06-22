@@ -5,7 +5,8 @@ class ShowTasks extends Component {
         super(props);
         this.state={
             tasks: [],
-            members : []
+            // members : [],
+            // date : []
         }
        
     }
@@ -23,28 +24,60 @@ class ShowTasks extends Component {
         })
     }
     getTasks(res){
-        var taskList=[],members=[];
-        res.forEach((item,i)=>{
-            taskList.push(item.task);
-            members.push(item.member)
-        })
-        console.log(taskList);
-        console.log(members);
+        console.log(res);
+        // var taskList=[],members=[],date=[];
+        var groups = {};
+        for (var i = 0; i < res.length; i++) {
+            {
+                var groupName = res[i].member;
+                if (!groups[groupName]) {
+                     groups[groupName] = [];
+                }
+             groups[groupName].push({task: res[i].task , dueDate: res[i].dueDate});
+            }
+        }   
+        let myArray=[];
+        for (groupName in groups) {
+            myArray.push({member: groupName, tasks: groups[groupName]});
+        }
+    
+        console.log(myArray);
         this.setState({
-            tasks : taskList,
-            members : members
+            tasks : myArray
         })
-        console.log(this.state.tasks);
+    
+    //     res.forEach((item,i)=>{
+    //         taskList.push(item.task);
+    //         members.push(item.member);
+    //         date.push(item.dueDate);
+    //     })
+    //     console.log(taskList);
+    //     console.log(members);
+    //     this.setState({
+    //         tasks : taskList,
+    //         members : members,
+    //         date : date
+    //     })
+    //     console.log(this.state.tasks);
     }
   render() {
     let taskList = this.state.tasks;
-    let members = this.state.members;
+    // let members = this.state.members;
+    // let date = this.state.date;
     console.log(taskList);
         return(
             <div>{
                 taskList.map((item,i)=>{
-                    console.log("inside map"+item);
-                    return <div className="assignedTasks">{item + "- Assigned to "+members[i]}</div>
+                    // console.log("inside map"+item);
+                    return (
+                    <div className="assignedTasks">
+                        <div className="member">{item.member}</div>{
+                        item.tasks.map((val,i)=>{
+                           return <div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
+                        })
+                        }
+                    </div>
+                    )
                 })
 
             }

@@ -65,19 +65,33 @@ form{
 input{
   border-radius: 5px;
   padding-bottom: 11px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 9px;
 }
 .taskName{
-  width: 55%;
+  width: 40%;
   margin-right: 8px;
 }
 .teamMember{
   width: 30%;
   margin-right: 8px;
 }
+#date{
+  width: 16%;
+  padding-bottom: 4px;
+}
+.Select{
+  display: inline-block;
+  width: 25%;
+  margin-left: 7px;
+  padding-right: 6px;
+}
 .submit{
   width: 12%;
   background-color: #eb4662;
   font-size: 1em;
+  padding-bottom: 5px;
 }
 .lists{
   margin-top: 10px;
@@ -87,6 +101,12 @@ input{
   display: inline-block;
   width: 49%;
   margin-right: 2%
+}
+.member{
+  text-align: center;
+  text-transform: capitalize;
+  padding: 6px;
+  margin-bottom: 5px;
 }
 .review{
   display: inline-block;
@@ -107,7 +127,27 @@ input{
   border-radius: 5px;
   padding-bottom: 5px;
   font-size: 15px;
-  color: white; 
+  color: white;
+  box-sizing: border-box;
+  text-transform: capitalize;
+}
+.due-date {
+  float: right;
+  font-size: 10px;
+  color: #999;
+}
+.due_date {
+  float: right;
+  font-size: 10px;
+  color: #999;
+  margin-top: 6px;
+  margin-right: 16px;
+}
+.assignedTasks > div {
+  line-height: 28px;
+}
+.assignedTasks span{
+  padding: 0 13px;
 }
 #menteeTasks{
   background-color: #006666;

@@ -17,16 +17,18 @@ app.use(function(req, res, next) {
 //****************************mongoSchema************************//
  var mentorsDashboardSchema = new mongoose.Schema({
      task: String,
-     member: String
+     member: String,
+     dueDate: String
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
 
 app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
-    // console.log(req.body);
+    console.log(req.body);
     var newTask = new tasks({
         task: req.body.taskName,
-        member: req.body.teamMember
+        member: req.body.teamMember,
+        dueDate: req.body.date
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
@@ -47,7 +49,7 @@ app.get("/mentor/tasks" , function(req,res){
     });
 });
 app.get("/mentee/tasks" , function(req,res){
-    tasks.aggregate([{$match :{member: { $eq:("megha")} }},{$group: {_id: '$task'}}]).exec(function(err,result){
+    tasks.aggregate([{$match :{member: { $eq:("megha")} }}]).exec(function(err,result){
         if(err){
             console.log("error");
         }
