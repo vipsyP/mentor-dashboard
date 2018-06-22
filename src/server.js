@@ -44,7 +44,7 @@ app.get("/mentor/tasks" , function(req,res){
         else{
             // res.render("index.ejs" ,{todoList : todoList}); 
             res.send(tasksList);
-            console.log(tasksList);
+            // console.log(tasksList);
         }
     });
 });
@@ -54,9 +54,9 @@ app.get("/mentee/tasks" , function(req,res){
             console.log("error");
         }
         else{
-            console.log(result);
+            // console.log(result);
             res.send(result);
-            console.log(result);
+            // console.log(result);
         }
     });
 });

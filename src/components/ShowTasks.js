@@ -8,6 +8,7 @@ class ShowTasks extends Component {
             // members : [],
             // date : []
         }
+       console.log(props);
        
     }
     componentWillMount(){
