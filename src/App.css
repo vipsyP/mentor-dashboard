@@ -73,6 +73,7 @@ input{
 .teamMember{
   width: 30%;
   margin-right: 8px;
+  padding-bottom: 10px;
 }
 .submit{
   width: 12%;

@@ -23,15 +23,16 @@ app.use(function(req, res, next) {
 
 app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
-    // console.log(req.body);
+     console.log(req.body);
+     console.log(req.query);
     var newTask = new tasks({
         task: req.body.taskName,
-        member: req.body.teamMember
+        member: req.query.member
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            console.log("inserted "+ newTask);
+            // console.log("inserted "+ newTask);
         }
     });
 });
@@ -42,7 +43,7 @@ app.get("/mentor/tasks" , function(req,res){
         else{
             // res.render("index.ejs" ,{todoList : todoList}); 
             res.send(tasksList);
-            console.log(tasksList);
+            // console.log(tasksList);
         }
     });
 });
@@ -52,9 +53,9 @@ app.get("/mentee/tasks" , function(req,res){
             console.log("error");
         }
         else{
-            console.log(result);
+            // console.log(result);
             res.send(result);
-            console.log(result);
+            // console.log(result);
         }
     });
 });

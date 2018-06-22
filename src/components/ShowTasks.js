@@ -7,6 +7,7 @@ class ShowTasks extends Component {
             tasks: [],
             members : []
         }
+       console.log(props);
        
     }
     componentWillMount(){
@@ -43,7 +44,7 @@ class ShowTasks extends Component {
         return(
             <div>{
                 taskList.map((item,i)=>{
-                    console.log("inside map"+item);
+                    // console.log("inside map"+item);
                     return <div className="assignedTasks">{item + "- Assigned to "+members[i]}</div>
                 })
 
