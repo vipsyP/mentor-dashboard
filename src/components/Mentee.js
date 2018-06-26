@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+let change ='';
 
 class Mentee extends Component {
     constructor(props){
@@ -12,15 +13,27 @@ class Mentee extends Component {
             
         }
     }
-    handleSubmit(item,i){
-        // e.preventDefault();
-        
+    handleClick(ev){
+         ev.preventDefault();
+        console.log(ev);
+        change = ev.target.parentNode.firstChild.firstChild.innerText
+        console.log(change);
+        fetch('http://localhost:4000/mentor/tasks')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(response => {
+            console.log(response);
+            this.getTasks(response)
+        }) 
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        })
         this.setState(prevState => ({
             submitted : !prevState.submitted,
-            btn : item
         }));
     }
-    componentWillMount(){
+    componentDidMount(){
         fetch('http://localhost:4000/mentee/tasks')
         .then(function(response) {
             return response.json();
@@ -53,6 +66,25 @@ class Mentee extends Component {
         // })
         // console.log(this.state.tasks);
     }
+    getTasks(res){
+        let id = '';
+        res.map((item,i)=>{
+            if(res[i].task === change){
+                id = res[i]._id;
+                fetch('http://localhost:4000/mentee/tasks/sub'+id)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(response => {
+            console.log(response);
+        }) 
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        })
+            }
+        });
+        console.log(id);
+    }
     render() {
         let menteeTaskList = this.state.menteeTasks;
         let dueDate = this.state.dueDate;
@@ -72,7 +104,7 @@ class Mentee extends Component {
                         <span>{item}</span>
                         <span className="due_date">{dueDate[i]}</span>
                     </div>
-                    <input type="button"  value = {this.state.btn === item && this.state.submitted? "Submitted" : "Submit for review"} onClick = {this.handleSubmit.bind(this,item,i)} /> 
+                    <input type="button"  value = {this.state.submitted? "Submitted" : "Submit for review"} onClick = {(e) => this.handleClick(e)} /> 
                 </div>
                 )
               })

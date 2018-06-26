@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ShowTasks from './ShowTasks';
+import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -57,6 +58,7 @@ class Mentor extends Component {
             <div className="review">Tasks ready for review</div>
           </div>
           <ShowTasks />
+          <SubmittedTasks />
         </div>
       )
     }

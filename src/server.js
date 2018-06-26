@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
      task: String,
      member: String,
      dueDate: String,
-     submitted: false
+     submitted: Boolean
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
 
@@ -29,7 +29,8 @@ app.post("/mentor/task/create" , function(req,res){
     var newTask = new tasks({
         task: req.body.taskName,
         member: req.body.teamMember,
-        dueDate: req.body.date
+        dueDate: req.body.date,
+        submitted: false
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
@@ -55,13 +56,33 @@ app.get("/mentee/tasks" , function(req,res){
             console.log("error");
         }
         else{
-            // console.log(result);
+             console.log(result);
             res.send(result);
             // console.log(result);
         }
     });
 });
 
+app.put("/mentee/tasks/sub/:id" , function(req,res){
+    // tasks.aggregate([{$match :{member: { $eq:("megha")} }}]).exec(function(err,result){
+        // if(err){
+        //     console.log("error");
+        // }
+        // else{
+        //      console.log(req.query);
+        //     res.send(result);
+        //     // console.log(result);
+        // }
+    // });
+    console.log(req.query);
+    var id = req.params.id;
+    console.log(id);
+    db.collection('tasks').update({ _id: ObjectId(id)}, req.body, function (err, result) {
+        res.send(
+            (err === null) ? {msg: ''} : {msg: err}
+        );
+    });
+});
 
 
 app.listen(4000,function(){
