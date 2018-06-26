@@ -8,16 +8,17 @@ class Mentee extends Component {
             menteeTasks : [],
             dueDate : [],
             submitted : false,
-            btn : ''
+            btn : '',
             
         }
     }
-    handleSubmit(item){
+    handleSubmit(item,i){
         // e.preventDefault();
+        
         this.setState(prevState => ({
             submitted : !prevState.submitted,
             btn : item
-          }));
+        }));
     }
     componentWillMount(){
         fetch('http://localhost:4000/mentee/tasks')
@@ -71,7 +72,7 @@ class Mentee extends Component {
                         <span>{item}</span>
                         <span className="due_date">{dueDate[i]}</span>
                     </div>
-                    <input type="button" value = {this.state.btn === item && this.state.submitted? "Submitted" : "Submit for review"} onClick = {this.handleSubmit.bind(this,item)} /> 
+                    <input type="button"  value = {this.state.btn === item && this.state.submitted? "Submitted" : "Submit for review"} onClick = {this.handleSubmit.bind(this,item,i)} /> 
                 </div>
                 )
               })

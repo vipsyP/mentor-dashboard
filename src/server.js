@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
 //***************************mongoose connection *************//
-mongoose.connect("mongodb://localhost/mentorsDashboard");
+mongoose.connect("mongodb://myteam:myteam1@ds119171.mlab.com:19171/mentorsdashboard");
 
 app.use(express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -18,7 +18,8 @@ app.use(function(req, res, next) {
  var mentorsDashboardSchema = new mongoose.Schema({
      task: String,
      member: String,
-     dueDate: String
+     dueDate: String,
+     submitted: false
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
 
