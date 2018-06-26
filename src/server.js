@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 
 app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
-    console.log(req.body);
+    // console.log(req.body);
     var newTask = new tasks({
         task: req.body.taskName,
         member: req.body.teamMember,
@@ -35,7 +35,7 @@ app.post("/mentor/task/create" , function(req,res){
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            console.log("inserted "+ newTask);
+            // console.log("inserted "+ newTask);
         }
     });
 });
@@ -56,32 +56,40 @@ app.get("/mentee/tasks" , function(req,res){
             console.log("error");
         }
         else{
-             console.log(result);
+            //  console.log(result);
             res.send(result);
             // console.log(result);
         }
     });
 });
 
-app.put("/mentee/tasks/sub/:id" , function(req,res){
+app.get("/mentee/tasks/sub" , function(req,res){
     // tasks.aggregate([{$match :{member: { $eq:("megha")} }}]).exec(function(err,result){
         // if(err){
         //     console.log("error");
         // }
         // else{
-        //      console.log(req.query);
+             console.log(req.query);
+            //  var collection = db.collection('tasks');
+             tasks.update({_id: req.query.id}, {$set: {submitted:true}}, function(err, result) {
+                if (err) {
+                  res.send(err);
+                }
+                res.send(result);
+              });
         //     res.send(result);
         //     // console.log(result);
         // }
     // });
-    console.log(req.query);
-    var id = req.params.id;
-    console.log(id);
-    db.collection('tasks').update({ _id: ObjectId(id)}, req.body, function (err, result) {
-        res.send(
-            (err === null) ? {msg: ''} : {msg: err}
-        );
-    });
+    // res.send("hello")
+    // res.send("sadf")
+    // var id = req.query.id;
+    // console.log(id);
+    // db.collection('tasks').update({ _id: ObjectId(id)}, req.body, function (err, result) {
+    //     res.send(
+    //         (err === null) ? {msg: ''} : {msg: err}
+    //     );
+    // });
 });
 
 

@@ -57,8 +57,14 @@ class Mentor extends Component {
             <div className="taskList">Assigned Tasks</div>
             <div className="review">Tasks ready for review</div>
           </div>
-          <ShowTasks />
-          <SubmittedTasks />
+         <div>
+          <div className="allTasks">
+              <ShowTasks />
+          </div>
+            <div className="submittedTasks">
+            <SubmittedTasks />
+            </div>
+         </div>
         </div>
       )
     }

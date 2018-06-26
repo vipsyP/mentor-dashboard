@@ -124,7 +124,6 @@ input{
 .assignedTasks{
   background-color: #006666;
   margin-top: 10px;
-  width: 49%;
   border-radius: 5px;
   padding-bottom: 5px;
   font-size: 15px;
@@ -167,4 +166,15 @@ input{
   display: inline-block;
   margin-left: 8px;
   width: 14%;
+}
+.allTasks{
+  display: inline-block;
+  width: 49%;
+  margin-right: 1%;
+}
+.submittedTasks{
+  display: inline-block;
+  width: 49%;
+  margin-left: 1%;
+  vertical-align: top;
 }

@@ -8,30 +8,28 @@ class Mentee extends Component {
         this.state={
             menteeTasks : [],
             dueDate : [],
-            submitted : false,
             btn : '',
-            
+            submit: []
         }
     }
     handleClick(ev){
          ev.preventDefault();
-        console.log(ev);
+         document.getElementById("submitButton").setAttribute("disabled","disabled")
+        // console.log(ev);
         change = ev.target.parentNode.firstChild.firstChild.innerText
-        console.log(change);
+        // console.log(change);
         fetch('http://localhost:4000/mentor/tasks')
         .then(function(response) {
             return response.json();
         })
         .then(response => {
-            console.log(response);
+            // console.log(response);
             this.getTasks(response)
         }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         })
-        this.setState(prevState => ({
-            submitted : !prevState.submitted,
-        }));
+       
     }
     componentDidMount(){
         fetch('http://localhost:4000/mentee/tasks')
@@ -39,7 +37,7 @@ class Mentee extends Component {
             return response.json();
         })
         .then(response => {
-            console.log(response);
+            // console.log(response);
             this.getMenteeTasks(response)
         }) 
         .catch(function(err) {
@@ -47,16 +45,19 @@ class Mentee extends Component {
         })
     }
     getMenteeTasks(res){
-        console.log(res);
-        var menteeTasks=[],dueDate=[];
+        // console.log(res);
+        var menteeTasks=[],dueDate=[],submit=[];
         res.forEach((item,i)=>{
             menteeTasks.push(item.task);
             dueDate.push(item.dueDate);
+            submit.push(item.submitted);
+           
         })
-        console.log(menteeTasks);
+        // console.log(menteeTasks);
         this.setState({
             menteeTasks : menteeTasks,
-            dueDate : dueDate
+            dueDate : dueDate,
+            submit : submit
         })
         
         // ReactDOM.render(menteeTasks,document.getElementById(menteeTasks))
@@ -67,28 +68,35 @@ class Mentee extends Component {
         // console.log(this.state.tasks);
     }
     getTasks(res){
-        let id = '';
+        let id = '',submit=[];
         res.map((item,i)=>{
+            if(item.member==="megha"){
+             submit.push(item.submitted);
+            }
             if(res[i].task === change){
                 id = res[i]._id;
-                fetch('http://localhost:4000/mentee/tasks/sub'+id)
+                fetch('http://localhost:4000/mentee/tasks/sub?id='+id)
         .then(function(response) {
             return response.json();
         })
-        .then(response => {
-            console.log(response);
-        }) 
+        // .then(response => {
+        //     // console.log(response);
+        // }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         })
             }
         });
-        console.log(id);
+        // console.log(id);
+        this.setState({
+            submit : submit
+        });
     }
     render() {
         let menteeTaskList = this.state.menteeTasks;
         let dueDate = this.state.dueDate;
-        console.log(menteeTaskList);
+        let submittedTasks = this.state.submit;
+        // console.log(menteeTaskList);
       return (
         <div className="container">
           <div className="header"><span>Mentee Dashboard</span></div>
@@ -104,7 +112,7 @@ class Mentee extends Component {
                         <span>{item}</span>
                         <span className="due_date">{dueDate[i]}</span>
                     </div>
-                    <input type="button"  value = {this.state.submitted? "Submitted" : "Submit for review"} onClick = {(e) => this.handleClick(e)} /> 
+                    <input id="submitButton" type="button"  value = {submittedTasks[i]? "Submitted" : "Submit for review"} onClick = {(e) => this.handleClick(e)} /> 
                 </div>
                 )
               })
