@@ -11,7 +11,7 @@ class ShowTasks extends Component {
        console.log(props);
        
     }
-    componentWillMount(){
+    componentDidMount(){
         fetch('http://localhost:4000/mentor/tasks')
         .then(function(response) {
             return response.json();

@@ -6,16 +6,19 @@ class Mentee extends Component {
         super(props);
         this.state={
             menteeTasks : [],
-            dueDate : []
+            dueDate : [],
+            submitted : false,
+            btn : ''
+            
         }
     }
-    // handleSubmit(e){
-    //     console.log("working");
-    //     // e.preventDefault();
-    //     this.setState({
-    //         show: true
-    //     })
-    // }
+    handleSubmit(item){
+        // e.preventDefault();
+        this.setState(prevState => ({
+            submitted : !prevState.submitted,
+            btn : item
+          }));
+    }
     componentWillMount(){
         fetch('http://localhost:4000/mentee/tasks')
         .then(function(response) {
@@ -41,6 +44,7 @@ class Mentee extends Component {
             menteeTasks : menteeTasks,
             dueDate : dueDate
         })
+        
         // ReactDOM.render(menteeTasks,document.getElementById(menteeTasks))
         // this.setState({
         //     tasks : taskList,
@@ -62,9 +66,12 @@ class Mentee extends Component {
           <div>{
               menteeTaskList.map((item,i)=>{
                 return (
-                <div id="menteeTasks">
-                    <span>{item}</span>
-                    <span className="due_date">{dueDate[i]}</span>
+                <div className="menteeTasks">
+                    <div id="menteeTasks">
+                        <span>{item}</span>
+                        <span className="due_date">{dueDate[i]}</span>
+                    </div>
+                    <input type="button" value = {this.state.btn === item && this.state.submitted? "Submitted" : "Submit for review"} onClick = {this.handleSubmit.bind(this,item)} /> 
                 </div>
                 )
               })

@@ -150,13 +150,21 @@ input{
 .assignedTasks span{
   padding: 0 13px;
 }
-#menteeTasks{
-  background-color: #006666;
+.menteeTasks{
   margin-top: 10px;
-  width: 100%;
+}
+#menteeTasks{
+  display: inline-block;
+  background-color: #006666;
+  width: 85%;
   border-radius: 5px;
-  padding-bottom: 5px;
   font-size: 15px;
   color: white; 
   text-align: center;
+}
+.menteeTasks input{
+  padding: 0;
+  display: inline-block;
+  margin-left: 8px;
+  width: 14%;
 }
