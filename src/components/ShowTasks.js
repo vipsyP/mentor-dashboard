@@ -34,7 +34,7 @@ class ShowTasks extends Component {
                 if (!groups[groupName]) {
                      groups[groupName] = [];
                 }
-             groups[groupName].push({task: res[i].task , dueDate: res[i].dueDate});
+             groups[groupName].push({task: res[i].task , dueDate: res[i].dueDate, submitted:res});
             }
         }   
         let myArray=[];

@@ -19,7 +19,8 @@ app.use(function(req, res, next) {
      task: String,
      member: String,
      dueDate: String,
-     submitted: Boolean
+     submitted: Boolean,
+     done: Boolean
  });
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
 
@@ -30,7 +31,8 @@ app.post("/mentor/task/create" , function(req,res){
         task: req.body.taskName,
         member: req.body.teamMember,
         dueDate: req.body.date,
-        submitted: false
+        submitted: false,
+        done: false
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
@@ -64,32 +66,32 @@ app.get("/mentee/tasks" , function(req,res){
 });
 
 app.get("/mentee/tasks/sub" , function(req,res){
-    // tasks.aggregate([{$match :{member: { $eq:("megha")} }}]).exec(function(err,result){
-        // if(err){
-        //     console.log("error");
-        // }
-        // else{
              console.log(req.query);
-            //  var collection = db.collection('tasks');
              tasks.update({_id: req.query.id}, {$set: {submitted:true}}, function(err, result) {
                 if (err) {
                   res.send(err);
                 }
                 res.send(result);
               });
-        //     res.send(result);
-        //     // console.log(result);
-        // }
-    // });
-    // res.send("hello")
-    // res.send("sadf")
-    // var id = req.query.id;
-    // console.log(id);
-    // db.collection('tasks').update({ _id: ObjectId(id)}, req.body, function (err, result) {
-    //     res.send(
-    //         (err === null) ? {msg: ''} : {msg: err}
-    //     );
-    // });
+});
+
+app.get("/mentee/tasks/complete" , function(req,res){
+    console.log(req.query);
+    tasks.update({_id: req.query.id}, {$set: {done:true}}, function(err, result) {
+       if (err) {
+         res.send(err);
+       }
+       res.send(result);
+     });
+});
+app.get("/mentee/tasks/reassign" , function(req,res){
+    console.log(req.query);
+    tasks.update({_id: req.query.id}, {$set: {submitted:false}}, function(err, result) {
+       if (err) {
+         res.send(err);
+       }
+       res.send(result);
+     });
 });
 
 

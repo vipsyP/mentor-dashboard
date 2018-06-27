@@ -178,3 +178,10 @@ input{
   margin-left: 1%;
   vertical-align: top;
 }
+.buttons{
+  margin-left: 198px;
+}
+.complete{
+  background-color: green;
+  margin-left: 8px;
+}

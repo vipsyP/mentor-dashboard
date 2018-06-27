@@ -5,20 +5,26 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 class Mentor extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state={
-    //         show: false
-    //     }
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
-    // handleSubmit(e){
-    //     console.log("working");
-    //     // e.preventDefault();
-    //     this.setState({
-    //         show: true
-    //     })
-    // }
+    constructor(props){
+        super(props);
+        this.state={
+            show: false,
+            done: false
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(){
+        // console.log("working");
+        // e.preventDefault();
+        this.setState(prevState => ({
+          show: !prevState.show
+        }));
+    }
+    handleComplete(){
+      this.setState({
+        done: true
+      });
+    }
     state = {
       selectedOption: '',
     }
@@ -36,7 +42,7 @@ class Mentor extends Component {
           <div className="header"><span>Mentors Dashboard</span></div>
           <div className="mentorName"><span>Hi Vignesh!</span></div>
           <div>
-            <form  method="post" action="http://localhost:4000/mentor/task/create">
+            <form  onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
               <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
               <input id="date" type="date" name="date" required/>
               <Select required
@@ -62,7 +68,7 @@ class Mentor extends Component {
               <ShowTasks />
           </div>
             <div className="submittedTasks">
-            <SubmittedTasks />
+            <SubmittedTasks func={this.handleComplete}/>
             </div>
          </div>
         </div>
