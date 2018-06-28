@@ -53,7 +53,9 @@ app.get("/mentor/tasks" , function(req,res){
     });
 });
 app.get("/mentee/tasks" , function(req,res){
-    tasks.aggregate([{$match :{member: { $eq:("megha")} }}]).exec(function(err,result){
+    console.log(req.query)
+    let user = req.query.user
+    tasks.aggregate([{$match :{member: { $eq:(req.query.user)} }}]).exec(function(err,result){
         if(err){
             console.log("error");
         }

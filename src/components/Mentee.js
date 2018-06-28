@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class Mentee extends Component {
-    constructor(props){
-        super(props);
+    constructor(props,{match}){
+        super(props,{match});
         this.state={
             menteeTasks : [],
-            submit: false
+            submit: false,
+            user : props.match.params.user
         }
     }
     handleClick(id){
@@ -27,7 +28,7 @@ class Mentee extends Component {
           }));
     }
     fetchFunc(){
-        fetch('http://localhost:4000/mentee/tasks')
+        fetch('http://localhost:4000/mentee/tasks?user='+this.props.match.params.user)
         .then(function(response) {
             return response.json();
         })
@@ -53,7 +54,7 @@ class Mentee extends Component {
       return (
         <div className="container">
           <div className="header"><span>Mentee Dashboard</span></div>
-          <div className="mentorName"><span>Hi Megha!</span></div>
+          <div className="mentorName"><span>{this.props.match.params.user}</span></div>
           <div className="lists">
             <div className="menteeTaskList">Assigned Tasks</div>
           </div>
