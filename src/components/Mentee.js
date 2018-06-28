@@ -17,11 +17,11 @@ class Mentee extends Component {
         })
         .then(response => {
              console.log(response);
+             this.fetchFunc()
         }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         })
-        this.fetchFunc()
         this.setState(prevState => ({
             submit: !prevState.submit
           }));
@@ -53,7 +53,7 @@ class Mentee extends Component {
       return (
         <div className="container">
           <div className="header"><span>Mentee Dashboard</span></div>
-          <div className="mentorName"><span>Hi Prabha!</span></div>
+          <div className="mentorName"><span>Hi Megha!</span></div>
           <div className="lists">
             <div className="menteeTaskList">Assigned Tasks</div>
           </div>
