@@ -5,8 +5,8 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 class Mentor extends Component {
-    constructor(props){
-        super(props);
+    constructor(props,{match}){
+        super(props,{match});
         this.state={
             show: false,
             done: false
@@ -40,7 +40,7 @@ class Mentor extends Component {
       return (
         <div className="container">
           <div className="header"><span>Mentors Dashboard</span></div>
-          <div className="mentorName"><span>Hi Vignesh!</span></div>
+          <div className="mentorName"><span>{this.props.match.params.user}</span></div>
           <div>
             <form  onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
               <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
