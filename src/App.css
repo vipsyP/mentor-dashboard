@@ -145,6 +145,7 @@ input{
 }
 .assignedTasks > div {
   line-height: 28px;
+  height: auto;
 }
 .assignedTasks span{
   padding: 0 13px;
@@ -186,5 +187,6 @@ input{
   margin-left: 8px;
 }
 .editDelete{
-  margin-left: 327px;
+  /* margin-left: 327px; */
+  display: -webkit-box;
 }
