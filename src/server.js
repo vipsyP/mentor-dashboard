@@ -96,6 +96,25 @@ app.get("/mentee/tasks/reassign" , function(req,res){
      });
 });
 
+// app.get("/task/update/:id", function(req,res){
+//     console.log(req.params.id);
+//     res.render("./components/edit-form",{todo : req.params.id});
+    
+// });
+
+app.post("/task/updatetask",function(req,res){
+    console.log(req.query);
+    tasks.update({_id: req.query.id}, {$set: {task:req.query.task}}, function(err, result) {
+        if (err) {
+            res.send(err);
+        }
+        res.send(result);
+        });
+});
+app.get("/task/deletetask", function(req,res){
+    tasks.remove({_id:req.query.id}, function(err, delData){
+    });
+});
 
 app.listen(4000,function(){
     console.log("server listening on port 4000");

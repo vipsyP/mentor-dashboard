@@ -1,15 +1,40 @@
 import React, { Component } from 'react';
+import EditForm  from './EditForm';
+import {Link, Redirect} from 'react-router-dom';
 
 class ShowTasks extends Component {
     constructor(props){
         super(props);
         this.state={
             tasks: [],
+            edit : false,
+            id : ''
             // members : [],
             // date : []
         }
        console.log(props);
        
+    }
+    handleEdit(id){
+        this.setState({
+            edit : true,
+            id :id
+        })
+    }
+    handleDelete(id){
+        console.log(id);
+        fetch('http://localhost:4000/task/deletetask?id='+id)
+        
+        .then(function(response) {
+            return response.json();
+        })
+        .then(response => {
+            console.log(response);
+            this.getTasks(response)
+        }) 
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        })
     }
     componentDidMount(){
         fetch('http://localhost:4000/mentor/tasks')
@@ -34,7 +59,7 @@ class ShowTasks extends Component {
                 if (!groups[groupName]) {
                      groups[groupName] = [];
                 }
-             groups[groupName].push({task: res[i].task , dueDate: res[i].dueDate, submitted:res});
+             groups[groupName].push({task: res[i].task , dueDate: res[i].dueDate, id:res[i]._id});
             }
         }   
         let myArray=[];
@@ -46,20 +71,7 @@ class ShowTasks extends Component {
         this.setState({
             tasks : myArray
         })
-    
-    //     res.forEach((item,i)=>{
-    //         taskList.push(item.task);
-    //         members.push(item.member);
-    //         date.push(item.dueDate);
-    //     })
-    //     console.log(taskList);
-    //     console.log(members);
-    //     this.setState({
-    //         tasks : taskList,
-    //         members : members,
-    //         date : date
-    //     })
-    //     console.log(this.state.tasks);
+   
     }
   render() {
     let taskList = this.state.tasks;
@@ -74,7 +86,15 @@ class ShowTasks extends Component {
                     <div className="assignedTasks">
                         <div className="member">{item.member}</div>{
                         item.tasks.map((val,i)=>{
-                           return <div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
+                           return <div>
+                               <span>{val.task}</span>
+                                <div className="editDelete">
+                                    <input  type="button" onClick={this.handleEdit.bind(this,val.id)} value="Edit" />
+                                    {this.state.edit && this.state.id===val.id ? <EditForm  id={val.id} /> :""}
+                                    <input onClick={this.handleDelete.bind(this,val.id)} type="button" value="Delete"/>
+                                 </div>
+                                <span className="due-date">Due date: {val.dueDate}</span>
+                                </div>
                         })
                         }
                     </div>
