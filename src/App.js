@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Mentor.css';
+import './ShowTasks.css';
 import Mentor from './components/Mentor';
 import Mentee from './components/Mentee';
 import Error from './components/Error';

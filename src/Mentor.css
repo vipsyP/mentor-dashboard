@@ -1,0 +1,73 @@
+.assignForm {
+    height: 40px;
+    margin-top: 17px;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.taskName {
+    border: 1px solid #bebebe;
+    text-decoration: none;
+    width: 47%;
+    margin-right: 8px;
+    height: 15px;
+    font-size: 14px;
+}
+
+.date {
+    border: 1px solid #bebebe;
+    margin-left:5px;
+    height: 15px;
+    width: 17%;
+    font-size: 14px;
+    color: grey;
+}
+
+.teamMember {
+    /* border: 1px solid black; */
+    width: 17%;
+    margin-left:13px;
+    padding-right: 6px;
+    font-size: 14px;
+}
+
+.assignTask {
+    width: 11%;
+    height: 36px;
+    background-color: #eb4662;
+    font-size: 12px;
+    border: none;
+    color: white;
+}
+
+.listHeadings {
+    margin-top: 10px;
+    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.listHeading {
+    background: #eb4662;
+    margin-top: 0;
+    text-align: center;
+    line-height: 39px;
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    /* color:#eb4662; */
+    /* border: 1px solid #eb4662; */
+    /* border: 1px solid #bebebe; */
+    display: inline-block;
+    width: 49%;
+    color: white;
+}
+
+.lists {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

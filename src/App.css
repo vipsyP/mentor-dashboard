@@ -59,9 +59,9 @@
   left: 15px;
   top: 21px;
 }
-form{
+/* form{
   margin-top: 10px;
-}
+} */
 input{
   border-radius: 5px;
   padding-bottom: 11px;
@@ -69,35 +69,32 @@ input{
   vertical-align: top;
   padding: 9px;
 }
-.taskName{
+/* .taskName{
   width: 40%;
   margin-right: 8px;
-}
-.teamMember{
+} */
+/* .teamMember{
   width: 30%;
   margin-right: 8px;
   padding-bottom: 10px;
-}
-#date{
+} */
+/* #date{
   width: 16%;
   padding-bottom: 4px;
-}
-.Select{
-  display: inline-block;
-  width: 25%;
-  margin-left: 7px;
-  padding-right: 6px;
-}
-.submit{
+} */
+
+/* .submit{
   width: 12%;
   background-color: #eb4662;
   font-size: 1em;
   padding-bottom: 5px;
-}
-.lists{
+  border: none;
+  color: white;
+} */
+/* .lists{
   margin-top: 10px;
   display: block;
-}
+} */
 .taskList{
   display: inline-block;
   width: 49%;
@@ -113,15 +110,16 @@ input{
   display: inline-block;
   width: 49%;
 }
-.lists div{
+/* .lists div{
+  margin-top: 0;
   text-align: center;
-  vertical-align: middle;
   line-height: 39px;
   border-radius: 5px;
   background-color:#eb4662;
-  padding-bottom: 15px;
-}
-.assignedTasks{
+  padding-top: 5px;
+  padding-bottom: 5px;
+} */
+/* .assignedTasks{
   background-color: #006666;
   margin-top: 10px;
   border-radius: 5px;
@@ -130,7 +128,7 @@ input{
   color: white;
   box-sizing: border-box;
   text-transform: capitalize;
-}
+} */
 .due-date {
   float: right;
   font-size: 10px;
@@ -168,25 +166,22 @@ input{
   margin-left: 8px;
   width: 14%;
 }
-.allTasks{
+/* .allTasks{
   display: inline-block;
   width: 49%;
   margin-right: 1%;
-}
+} */
 .submittedTasks{
   display: inline-block;
   width: 49%;
   margin-left: 1%;
   vertical-align: top;
 }
-.buttons{
+/* .buttons{
   margin-left: 198px;
-}
+} */
 .complete{
   background-color: green;
   margin-left: 8px;
 }
-.editDelete{
-  /* margin-left: 327px; */
-  display: -webkit-box;
-}
+

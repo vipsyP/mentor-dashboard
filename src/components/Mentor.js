@@ -39,13 +39,14 @@ class Mentor extends Component {
       const { selectedOption } = this.state;
       return (
         <div className="container">
-          <div className="header"><span>Mentors Dashboard</span></div>
+          <div className="header"><span>Mentor Dashboard</span></div>
           <div className="mentorName"><span>{this.props.match.params.user}</span></div>
           <div>
-            <form  onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
+            <form className = "assignForm" onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
               <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
-              <input id="date" type="date" name="date" required/>
+              <input className="date"id="date" type="date" name="date" required/>
               <Select required
+                className = "teamMember"
                 name="teamMember"
                 value={selectedOption}
                 onChange={this.handleChange}
@@ -56,18 +57,19 @@ class Mentor extends Component {
                   { value: 'vignesh', label: 'vignesh' },
                 ]}
               />
-              <input className="submit" type="submit" value="submit" />
+              <input className="assignTask" type="submit" value="Assign Task" />
             </form>
           </div>
-          <div className="lists">
-            <div className="taskList">Assigned Tasks</div>
-            <div className="review">Tasks ready for review</div>
+          <div className="listHeadings">
+            <div className="listHeading">Assigned Tasks</div>
+            <div className="listHeading">Tasks ready for review</div>
           </div>
-         <div>
-          <div className="allTasks">
+
+         <div className="lists">
+          <div className="tasksContainer">
               <ShowTasks />
           </div>
-            <div className="submittedTasks">
+            <div className="tasksContainer">
             <SubmittedTasks func={this.handleComplete}/>
             </div>
          </div>

@@ -96,22 +96,21 @@ class ShowTasks extends Component {
         console.log(taskList);
         console.log("Done: " + this.state.done);
         return (
-            <div>{
+            <div className= "tasks">{
                 taskList.map((item, i) => {
                     // console.log("inside map"+item);
                     return (
-                        <div className="assignedTasks">
+                        <div className="tasksPerUser">
                             <div className="member">{item.member}</div>{
                                 item.tasks.map((val, i) => {
-                                    return <div>
+                                    return (<div className = "task">
                                         <span>{val.task}<span className="due-date">Due date: {val.dueDate}</span></span>
-                                        <div className="editDelete">
+                                        <div className="buttons">
                                             <input type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
                                             {this.state.edit && this.state.id === val.id ? <EditForm id={val.id} /> : ""}
                                             <input onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
                                         </div>
-                                        <hr />
-                                    </div>
+                                    </div>)
                                 })
                             }
                         </div>
