@@ -7,22 +7,34 @@ class ShowTasks extends Component {
         super(props);
         this.state = {
             tasks: [],
-            edit: false,
             id: '',
-            done: false
+            done: false,
+            editfunc : this.props.handleEdit,
+            deleteFunc : this.props.handleDelete
             // members : [],
             // date : []
         }
         console.log(props);
 
     }
-    handleEdit(id) {
-        this.setState({
-            edit: true,
-            done: true,
-            id: id
-        })
-        console.log("Edit: " + this.state.done);
+    handleEdit(e, id) {
+        console.log(e.currentTarget.previousSibling.innerText);
+        console.log(id);
+        let task = e.currentTarget.previousSibling.innerText
+            fetch('http://localhost:4000/task/updatetask?task='+task+'&id='+id,{
+                method:'POST'
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(response => {
+                console.log(response);
+                this.fetchFunc();
+            }) 
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+            })
+        this.props.handleEdit
     }
     handleDelete(id) {
         console.log(id);
@@ -33,37 +45,30 @@ class ShowTasks extends Component {
             })
             .then(response => {
                 console.log(response);
-                this.getTasks(response)
+                this.fetchFunc()
             })
             .catch(function (err) {
                 console.log('Fetch Error :-S', err);
             })
-        this.setState({
-            done: true
-        })
-        console.log("Delete: " + this.state.done);
+            this.props.handleDelete
     }
     componentDidMount() {
+            this.fetchFunc()
+            this.props.func
+    }
+    fetchFunc(){
         fetch('http://localhost:4000/mentor/tasks')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(response => {
-                console.log(response);
-                this.getTasks(response)
-            })
-            .catch(function (err) {
-                console.log('Fetch Error :-S', err);
-            })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(response => {
+            console.log(response);
+            this.getTasks(response)
+        })
+        .catch(function (err) {
+            console.log('Fetch Error :-S', err);
+        })
     }
-
-
-    shouldComponentUpdate(prevState) {
-        console.log("Prev: " + prevState.done);
-        console.log("Upd: " + this.state.done);
-        return true;
-    }
-
 
 
 
@@ -89,6 +94,7 @@ class ShowTasks extends Component {
         this.setState({
             tasks: myArray
         })
+        this.props.func
 
     }
     render() {
@@ -104,10 +110,11 @@ class ShowTasks extends Component {
                             <div className="member">{item.member}</div>{
                                 item.tasks.map((val, i) => {
                                     return <div>
-                                        <span>{val.task}<span className="due-date">Due date: {val.dueDate}</span></span>
+                                       
+                                        <span className="due-date">Due date: {val.dueDate}</span>
                                         <div className="editDelete">
-                                            <input type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
-                                            {this.state.edit && this.state.id === val.id ? <EditForm id={val.id} /> : ""}
+                                            <span contenteditable="true">{val.task}</span>
+                                            <input type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" />
                                             <input onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
                                         </div>
                                         <hr />

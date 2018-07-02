@@ -22,22 +22,29 @@ app.use(function(req, res, next) {
      submitted: Boolean,
      done: Boolean
  });
+
  var tasks = mongoose.model("tasks",mentorsDashboardSchema);
+
+ var membersSchema = new mongoose.Schema({
+    member: String
+});
+var members = mongoose.model("members",membersSchema);
 
 app.post("/mentor/task/create" , function(req,res){
     // console.log("task added");
-    // console.log(req.body);
+     console.log(req.query);
     var newTask = new tasks({
-        task: req.body.taskName,
-        member: req.body.teamMember,
-        dueDate: req.body.date,
+        task: req.query.task,
+        member: req.query.member,
+        dueDate: req.query.date,
         submitted: false,
         done: false
     });
     tasks.create(newTask , function(err, tasks){
         if(err) console.log(err);
         else{
-            // console.log("inserted "+ newTask);
+          console.log("inserted "+ newTask);
+          res.send(tasks)
         }
     });
 });
@@ -113,6 +120,31 @@ app.post("/task/updatetask",function(req,res){
 });
 app.get("/task/deletetask", function(req,res){
     tasks.remove({_id:req.query.id}, function(err, delData){
+    });
+});
+
+app.post("/mentee/add" , function(req,res){
+    // console.log("task added");
+     console.log(req.query);
+    var newMember = new members ({
+        member: req.query.member,
+    });
+    members.create(newMember , function(err, member){
+        if(err) console.log(err);
+        else{
+             console.log("inserted "+ newMember);
+        }
+    });
+});
+
+app.get("/addMembers" , function(req,res){
+    members.find({},function(err, membersList){
+        if(err) console.log(err);
+        else{
+            // res.render("index.ejs" ,{todoList : todoList}); 
+            res.send( membersList);
+            // console.log(tasksList);
+        }
     });
 });
 

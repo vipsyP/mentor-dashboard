@@ -96,9 +96,9 @@ class SubmittedTasks extends Component {
                     <div className="assignedTasks">
                         <div className="member">{item.member}</div>{
                         item.tasks.map((val,i)=>{
-                           return <div><div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
-                            <div class="buttons"><input type="button" onClick={this.handleReassign.bind(this,val.ids)} value="improvement needed"/><input type="button" onClick={this.handleSubmit.bind(this,val.ids)} class="complete"value="completed"/></div>
-                           </div>
+                           return ( <div><div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
+                            <div className="buttons"><input type="button" onClick={this.handleReassign.bind(this,val.ids)} value="improvement needed"/><input type="button" onClick={this.handleSubmit.bind(this,val.ids)} className="complete"value="completed"/></div>
+                           </div>)  
                         })
                         }
                     </div>
