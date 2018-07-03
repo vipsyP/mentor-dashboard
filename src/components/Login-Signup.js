@@ -212,7 +212,7 @@ class LoginSignup extends Component {
         // }
         return (
             <div className = "LoginSignup">
-            <div className = "header">
+            <div className = "loginSignupHeader">
             <h1 className = "heading"> MyTeam </h1> 
             {/* <form className = "login"onSubmit = {this.validateLogin} action = "http://localhost:4000/login" method = "post">   */}
             {/* < form className = "login"onSubmit = {this.validateLogin} >*/ } 

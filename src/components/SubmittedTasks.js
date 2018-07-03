@@ -112,7 +112,9 @@ class SubmittedTasks extends Component {
                                     <span>{val.task}</span>
                                 </div>
 
-                                <span className="due-date">Due date: {val.dueDate}</span>
+                                <div className="dueDateContainer">
+                                    <span className="dueDate">Due date: {val.dueDate}</span>
+                                </div>
                            </div>)  
 
                         })

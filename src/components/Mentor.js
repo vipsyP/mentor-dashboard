@@ -162,19 +162,17 @@ class Mentor extends Component {
                             pathname: "/" 
                         }}/>:""} 
           <div className="header"><span>Mentors Dashboard</span></div>
-          <div className="mentorName"><span className="mentor-name">{this.props.match.params.user}</span></div>
-          <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
+          <div className="mentorName">
+            <span className="mentor-name">{this.props.match.params.user}</span>
+            <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
+          </div>
+         
           <div>
 
             <div className = "assignForm">
               <input className="taskName" id="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
               <input id="date" type="date" name="date" required/>
                             
-{/* =======
-            <form className = "assignForm" onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
-              <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
-              <input className="date"id="date" type="date" name="date" required/>
->>>>>>> ui-updates */}
               <Select required
                 className = "teamMember"
                 name="teamMember"
