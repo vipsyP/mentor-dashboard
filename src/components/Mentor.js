@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import {Redirect,Link} from 'react-router-dom';
+import Router from 'react-router-dom';
 import ShowTasks from './ShowTasks';
 import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 let teamMembers=[];
+
+// import LoginSignup from './Login-Signup'; 
 
 
 class Mentor extends Component {
@@ -18,6 +22,7 @@ class Mentor extends Component {
           done: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
     handleadd(){
       // e.preventDefault();
@@ -53,6 +58,28 @@ class Mentor extends Component {
           console.log('Fetch Error :-S', err);
       })
     }
+
+    logOut(event){
+      console.log("event in logout points to -",event);
+      const self=this;
+      fetch("http://localhost:4000/logout", {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                  "content-type": "application/json"
+              },
+              // body: JSON.stringify(signupdata)
+          }).then(function (response) {
+              console.log('data in logout', response);
+              return response.json();
+          }).then(response => {
+              self.setState({
+                  logoutStatus: response.status    
+              });
+          }).catch(err => {
+              console.log(err);
+          })
+  }
     handleSubmit(){
         // console.log("working");
         // e.preventDefault();
@@ -130,8 +157,13 @@ class Mentor extends Component {
       const { selectedOption } = this.state;
       return (
         <div className="container">
-          <div className="header"><span>Mentor Dashboard</span></div>
-          <div className="mentorName"><span>{this.props.match.params.user}</span></div>
+        {this.state.logoutStatus ?  <Redirect to = {
+                        {
+                            pathname: "/" 
+                        }}/>:""} 
+          <div className="header"><span>Mentors Dashboard</span></div>
+          <div className="mentorName"><span className="mentor-name">{this.props.match.params.user}</span></div>
+          <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
           <div>
 
             <div className = "assignForm">

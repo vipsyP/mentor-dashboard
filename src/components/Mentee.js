@@ -1,15 +1,42 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import LoginSignup from './Login-Signup'; 
+import {Redirect,Link} from 'react-router-dom';
+import Router from 'react-router-dom';
 class Mentee extends Component {
     constructor(props,{match}){
         super(props,{match});
         this.state={
             menteeTasks : [],
             submit: false,
-            user : props.match.params.user
+            user : props.match.params.user,
+            logoutStatus:false
         }
+        this.logOut = this.logOut.bind(this);
     }
+
+    logOut(event){
+        console.log("event in logout points to -",event);
+        const self=this;
+        fetch("http://localhost:4000/logout", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+                // body: JSON.stringify(signupdata)
+            }).then(function (response) {
+                console.log('data in logout', response);
+                return response.json();
+            }).then(response => {
+                self.setState({
+                    logoutStatus: response.status    
+                });
+            }).catch(err => {
+                console.log(err);
+            })
+    }
+    
     handleClick(id){
         console.log(id);
         fetch('http://localhost:4000/mentee/tasks/sub?id='+id)
@@ -53,10 +80,18 @@ class Mentee extends Component {
         let menteeTaskList = this.state.menteeTasks;
       return (
         <div className="container">
+        {this.state.logoutStatus ?  <Redirect to = {
+                        {
+                            pathname: "/" 
+                        }}/>:""} 
           <div className="header"><span>Mentee Dashboard</span></div>
-          <div className="mentorName"><span>{this.props.match.params.user}</span></div>
+          <div className="mentorName"><span className="mentee-name">{this.props.match.params.user}</span>
+          <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
+          </div>
+          
           <div className="menteeListHeadings">
-            <div className="menteeListHeading">Assigned Tasks</div>
+          {/* <div className="lists"> */}
+          <div className="menteeListHeading">Assigned Tasks</div>
           </div>
           <div className="menteeTasksContainer">{
               menteeTaskList.map((item,i)=>{
