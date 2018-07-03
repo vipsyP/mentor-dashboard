@@ -184,7 +184,7 @@ class Mentor extends Component {
                 options={this.state.mem}
               />
 
-              <input className="assignTask" type="submit" value="Assign Task" />
+              <input className="assignTask" type="button" value="Assign Task" onClick={this.handleSubmit.bind(this)} />
             </div>
             <div className="addMembers">
               <input id="member" type="text" placeholder="add member"/>

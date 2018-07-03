@@ -316,66 +316,71 @@ console.log("req.user bfr success redirect-",req.user);
 // });
 
 app.post("/mentor/task/create" , function(req,res){
-    console.log("task added");
+//     console.log("task added");
+//   // if(req.headers['cookie']!=null){
+//     console.log("inside mentor create task ",req.headers['cookie'] );
+//     let user_id=req.session.passport.user;
+//     UserDetails.findOne({
+//       _id:user_id
+//     }, function (err, user) {
+//       if (err) {
+//         res.send(err);
+//       }
+//       else{
+//         console.log('inside db find function req.session.passport.user',user);
+//         //   var newTask = new tasks({
+//         //     task: req.body.taskName,
+//         //     member: req.body.teamMember,
+//         //     dueDate: req.body.date,
+//         //     submitted: false,
+//         //     done: false
+//         // });
+//         // tasks.create(newTask , function(err, tasks){
+//         //     if(err) console.log(err);
+//         //     else{
+//         //         // console.log("inserted "+ newTask);
+//         //     }
+//         // });
 
-    let user_id=req.session.passport.user;
-    UserDetails.findOne({
-      _id:user_id
-    }, function (err, user) {
-      if (err) {
-        console.log('err', err);
-      }
+           console.log(req.query);
+    var newTask = new tasks({
+      task: req.query.task,
+      member: req.query.member,
+      dueDate: req.query.date,
+      submitted: false,
+      done: false
+  });
+  tasks.create(newTask , function(err, tasks){
+      if(err) console.log(err);
       else{
-        console.log('inside db find function req.session.passport.user',user);
-      //   var newTask = new tasks({
-      //     task: req.body.taskName,
-      //     member: req.body.teamMember,
-      //     dueDate: req.body.date,
-      //     submitted: false,
-      //     done: false
-      // });
-      // tasks.create(newTask , function(err, tasks){
-      //     if(err) console.log(err);
-      //     else{
-      //         // console.log("inserted "+ newTask);
-      //     }
-      // });
-
-        // console.log("task added");
-         console.log(req.query);
-        var newTask = new tasks({
-            task: req.query.task,
-            member: req.query.member,
-            dueDate: req.query.date,
-            submitted: false,
-            done: false
-        });
-        tasks.create(newTask , function(err, tasks){
-            if(err) console.log(err);
-            else{
-              console.log("inserted "+ newTask);
-              res.send(tasks)
-            }
-          });
+        console.log("inserted "+ newTask);
+        res.send(tasks)
       }
-    }
-    );
+    });
+//       }
+//     })
+//     // }
+//     // else{
+//     //   res.send({status:false});
+//     // }
+//   // }
+//   //   );
 
-    console.log('req.session.passport.user',req.session.passport.user);
-  console.log('inside mentor create task',user_id);
-    // var newTask = new tasks({
-    //     task: req.body.taskName,
-    //     member: req.body.teamMember,
-    //     dueDate: req.body.date,
-    //     submitted: false,
-    //     done: false
-    // });
-    // tasks.create(newTask , function(err, tasks){
-    //     if(err) console.log(err);
-    //     else{
-    //         // console.log("inserted "+ newTask);
-    //     }
-    // });
+//     console.log('req.session.passport.user',req.session.passport.user);
+//   console.log('inside mentor create task',user_id);
+//     // var newTask = new tasks({
+//     //     task: req.body.taskName,
+//     //     member: req.body.teamMember,
+//     //     dueDate: req.body.date,
+//     //     submitted: false,
+//     //     done: false
+//     // });
+//     // tasks.create(newTask , function(err, tasks){
+//     //     if(err) console.log(err);
+//     //     else{
+//     //         // console.log("inserted "+ newTask);
+//     //     }
+//     // });
 });
 
 app.get("/mentor/tasks" , function(req,res){
