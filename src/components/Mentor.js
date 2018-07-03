@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import {Redirect,Link} from 'react-router-dom';
 import Router from 'react-router-dom';
 import ShowTasks from './ShowTasks';
@@ -19,7 +20,8 @@ class Mentor extends Component {
           edit: false,
           delete: false,
           show: false,
-          done: false
+          done: false,
+          authState:false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -88,17 +90,33 @@ class Mentor extends Component {
       //  console.log(document.getElementById("date").value);
        let date = document.getElementById("date").value
       //  console.log(document.getElementsByName("teamMember")[0].value);
-       let member = document.getElementsByName("teamMember")[0].value
-       fetch("http://localhost:4000/mentor/task/create?task="+task+'&date='+date+'&member='+member,{
-            method:'POST'
+       let member = document.getElementsByName("teamMember")[0].value;
+       let data={
+         task:task,
+         date:date,
+         member:member
+       }
+      //  fetch("http://localhost:4000/mentor/task/create?task="+task+'&date='+date+'&member='+member,{
+        const self=this;
+        fetch("http://localhost:4000/mentor/task/create",{
+            method:'POST',
+            credentials: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(data)
         })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
-            console.log(response);
-           
-            this.getUpdatedTask()
+            console.log("response after successful task insertion",response);
+            self.setState({
+              authState:response.status 
+            });
+            console.log("response after successful task insertion authState is ",this.state.authState);
+            
+             this.getUpdatedTask()
         }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
@@ -108,9 +126,16 @@ class Mentor extends Component {
     }
 
     getUpdatedTask(){
-      this.setState({
-        show: true
-      });
+      debugger;
+      {(this.state.authState==false)? <Redirect to = {
+        {
+            pathname: "/" 
+        }}/>:this.setState({
+          show: true
+        })} 
+      // this.setState({
+      //   show: true
+      // });
     }
     handleComplete(){
       this.setState({
@@ -129,7 +154,13 @@ class Mentor extends Component {
       }
     }
     componentDidMount(){
-      fetch('http://localhost:4000/addMembers')
+      fetch('http://localhost:4000/addMembers',{
+        method:'GET',
+            credentials: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+      })
                   .then(function (response) {
                       return response.json();
                   })
@@ -157,10 +188,9 @@ class Mentor extends Component {
       const { selectedOption } = this.state;
       return (
         <div className="container">
-        {this.state.logoutStatus ?  <Redirect to = {
-                        {
-                            pathname: "/" 
-                        }}/>:""} 
+        {this.state.logoutStatus ?  <Redirect to = 
+                         "/" 
+                       />:""} 
           <div className="header"><span>Mentors Dashboard</span></div>
           <div className="mentorName"><span className="mentor-name">{this.props.match.params.user}</span></div>
           <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>

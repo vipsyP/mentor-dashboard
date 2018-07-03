@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import ReactDOM from 'react-dom';
 import LoginSignup from './Login-Signup'; 
 import {Redirect,Link} from 'react-router-dom';
@@ -10,7 +11,8 @@ class Mentee extends Component {
             menteeTasks : [],
             submit: false,
             user : props.match.params.user,
-            logoutStatus:false
+            logoutStatus:false,
+            authState:false
         }
         this.logOut = this.logOut.bind(this);
     }
@@ -55,7 +57,13 @@ class Mentee extends Component {
           }));
     }
     fetchFunc(){
-        fetch('http://localhost:4000/mentee/tasks?user='+this.props.match.params.user)
+        fetch('http://localhost:4000/mentee/tasks?user='+this.props.match.params.user,{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
         .then(function(response) {
             return response.json();
         })

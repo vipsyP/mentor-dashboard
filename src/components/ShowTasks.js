@@ -57,12 +57,20 @@ class ShowTasks extends Component {
             this.props.func
     }
     fetchFunc(){
-        fetch('http://localhost:4000/mentor/tasks')
+        fetch('http://localhost:4000/mentor/tasks',{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+            
+        })
         .then(function (response) {
             return response.json();
         })
         .then(response => {
-            console.log(response);
+            console.log("inside mentor tasks response",response);
+            console.log("inside mentor tasks response.status=",response.status);
             this.getTasks(response)
         })
         .catch(function (err) {
