@@ -1,9 +1,17 @@
+.mentorNameLabel {
+    font-weight: 100;
+    color: white;
+    margin-top: 10px;
+    padding-left:10px;
+}
+
 .mentorName{
+    white-space: nowrap;
     color: white;
     margin-top: 10px;
     padding-left:5px;
+    font-weight: 500;
   }
-  
 
 .placeholder {
 
@@ -39,31 +47,36 @@
   }
 
 .assignForm {
-    width: 100%;
+    width: 98%;
     height: 40px;
     margin-top: 17px;
     margin-bottom: 0px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    /* padding: 0px 10px 5px 10px; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
 .taskName {
-    border: 1px solid #bebebe;
+    /* border: 1px solid #bebebe; */
     text-decoration: none;
     width: 47%;
     margin-right: 8px;
-    height: 15px;
+    height: 14px;
     font-size: 14px;
 }
 
 .date {
-    border: 1px solid #bebebe;
+    /* border: 1px solid #bebebe; */
     margin-left:5px;
-    height: 15px;
+    padding: 6px 9px;
+    height:20px;
     width: 17%;
     font-size: 14px;
     color: grey;
+    /* border */
 }
 
 .teamMember {
@@ -72,15 +85,17 @@
     margin-left:13px;
     padding-right: 6px;
     font-size: 14px;
+    border-radius: none;
 }
 
 .assignTask {
     width: 11%;
-    height: 36px;
+    height: 34px;
     /* background-color: #eb4662; */
     font-size: 12px;
     border: none;
     color: white;
+    margin-top:1px;
 
     /* padding: 15px 32px; */
     text-align: center;
@@ -92,7 +107,7 @@
 
     background-color: white; 
     color: black; 
-    border: 2px solid gray;
+    /* border: 2px solid gray; */
 }
 
 .listsSectionContainer {
@@ -123,9 +138,11 @@
 .listHeading {
     margin-top: 0;
     text-align: center;
-    line-height: 39px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    /* line-height: 39px; */
+    /* padding-top: 2px; */
+    /* padding-bottom: 2px; */
+    font-size: 17px;
+    font-weight: 100;
     /* color:#eb4662; */
     /* border: 1px solid #eb4662; */
     /* border: 1px solid #bebebe; */

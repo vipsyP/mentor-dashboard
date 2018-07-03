@@ -4,7 +4,8 @@
   /* margin-right: 1%; */
   max-height: 100px;
   font-family: 'Roboto', sans-serif;
-
+  /* margin-left: auto;
+  margin-right: auto; */
 
 }
 
@@ -19,8 +20,10 @@
   /* border: 1px solid #424242; */
   /* border: 1px solid #bebebe; */
       /* border: 1px solid #eb4662; */
-
-  border-radius: 2px;
+  /* width: 98%;
+  margin-left: auto;
+  margin-right: auto; */
+  border-radius: 0px;
   padding-bottom: 1px;
   font-size: 15px;
   /* color: white; */
@@ -28,15 +31,16 @@
   box-sizing: border-box;
   text-transform: capitalize;
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .member {
   /* color: white;   */
+
   color: black;
   margin:0;
   padding:0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
   text-align: start;
   padding-left: 20px;
@@ -53,7 +57,7 @@
   padding: 20px 10px;
   padding-top: 5px;
   padding-bottom: 7px;
-  margin: 4px 4px 3px 4px;
+  margin: 9px 9px 9px 9px;
   color: gray;
   /* margin-top: 0px; */
   /* margin-top: 10px;
@@ -80,7 +84,7 @@
 }
 
 .delete {
-  opacity: 0.5;
+  opacity: 0.6;
   width: 12px;
   height: 12px;
   /* background: #eb4662; */

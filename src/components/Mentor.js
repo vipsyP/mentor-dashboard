@@ -159,7 +159,7 @@ class Mentor extends Component {
         <div className="rootContainer">
         
         <div className="topBar">
-              <span className = "mentorName">Mentor:{this.props.match.params.user}</span>
+        <span className = "mentorNameLabel">Mentor:</span><span className = "mentorName">{this.props.match.params.user}</span>
               <h1 className = "topBarHeading"> MyTeam </h1> 
               <div className = "placeholder">
               <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> </div>
@@ -182,7 +182,7 @@ class Mentor extends Component {
               
               <input className="taskName" id="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
               
-              <input id="date" type="date" name="date" required/>
+              <input  className="date" id="date" type="date" name="date" required/>
                             
               <Select required
                 className = "teamMember"

@@ -53,25 +53,10 @@
 } 
 
 
-.logout-button{
-  width:100%;
-  width:65px;
-  background-color: #4CAF50; /* Green */
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  margin: 4px 0px;
 
-  cursor: pointer;
-  border-radius: 3px;
-  margin-left: 0px;
-  color: white;
-  padding: 10px 7px;
-  border: none;
-}
 input{
-  border-radius: 5px;
-  padding-bottom: 11px;
+  /* border-radius: 5px; */
+  padding-bottom: 5px;
   display: inline-block;
   vertical-align: top;
   padding: 9px;
