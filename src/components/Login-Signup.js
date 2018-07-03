@@ -211,25 +211,23 @@ class LoginSignup extends Component {
         //     <Mentee />
         // }
         return (
-            <div className = "LoginSignup">
-            <div className = "loginSignupHeader">
-            <h1 className = "heading"> MyTeam </h1> 
+            <div className = "rootContainer">
+            <div className = "topBar">
+            <h1 className = "topBarHeading"> MyTeam </h1> 
             {/* <form className = "login"onSubmit = {this.validateLogin} action = "http://localhost:4000/login" method = "post">   */}
             {/* < form className = "login"onSubmit = {this.validateLogin} >*/ } 
             <form className = "login" >
            
-            <input id = "username" className = "login-field" type = "text"value = {this.state.loginEmail} name = "username" onChange = {this.setLoginEmail} placeholder = "E-mail" / >
+            <input id = "username" className = "login-field username" type = "text"value = {this.state.loginEmail} name = "username" onChange = {this.setLoginEmail} placeholder = "E-mail" / >
             <br/>
             
 
-            <div>
-            <input id = "password" className = "login-field" type = "password" value = {this.state.loginPassword} name = "password" onChange = {this.setLoginPassword} placeholder = "Password" / >
-            </div>
+            <input id = "password" className = "login-field password" type = "password" value = {this.state.loginPassword} name = "password" onChange = {this.setLoginPassword} placeholder = "Password" / >
+
 
             <select name = "role" className = "login-dropdown" onChange = {this.setLoginAs} placeholder="As a" >
-            
-            <option value = "Mentee" > I 'm a Mentee</option>
-             <option value = "Mentor" > I 'm a Mentor</option> 
+                <option value = "Mentee" > I 'm a Mentee</option>
+                <option value = "Mentor" > I 'm a Mentor</option> 
              </select >
 
             <div>
@@ -250,7 +248,7 @@ class LoginSignup extends Component {
                 
                 
                 <div className = "body" >
-                <h1 className = "subtitle" > Everything is on track with myTeam </h1> 
+                <h1 className = "subtitle" > Everything is on track with myTeam! </h1> 
                 {/* <form className = "signup" action = "http://localhost:4000/signup" onSubmit = {this.validateSignup} method = "post" > */}
                 <form className="signup">
                 <h3 className = "signup-text" > Create a free account </h3> <div >

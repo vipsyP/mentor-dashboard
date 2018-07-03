@@ -17,10 +17,16 @@
   font-size: large;
 }
 
+
+.topContainer {
+  
+}
+
+
 .container{
   width: 70%;
   margin: 0 auto;
-  transform: translateY(10% );
+  /* transform: translateY(10% ); */
 }
 .header{
   background-color: #424242;

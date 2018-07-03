@@ -156,7 +156,13 @@ class Mentor extends Component {
     render() {
       const { selectedOption } = this.state;
       return (
-        <div className="container">
+        <div className="topBarContainer">
+        
+        <div className="topBar">
+
+              <h1 className = "topBarHeading"> MyTeam </h1> 
+              <div className = "placeholder"> </div>
+          </div>
         {this.state.logoutStatus ?  <Redirect to = {
                         {
                             pathname: "/" 
