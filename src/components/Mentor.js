@@ -156,27 +156,32 @@ class Mentor extends Component {
     render() {
       const { selectedOption } = this.state;
       return (
-        <div className="topBarContainer">
+        <div className="rootContainer">
         
         <div className="topBar">
-
+              <span className = "mentorName">Mentor:{this.props.match.params.user}</span>
               <h1 className = "topBarHeading"> MyTeam </h1> 
-              <div className = "placeholder"> </div>
+              <div className = "placeholder">
+              <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> </div>
           </div>
         {this.state.logoutStatus ?  <Redirect to = {
                         {
                             pathname: "/" 
                         }}/>:""} 
-          <div className="header"><span>Mentors Dashboard</span></div>
-          <div className="mentorName">
-            <span className="mentor-name">{this.props.match.params.user}</span>
-            <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
-          </div>
+          {/* <div className="header"><span>Mentors Dashboard</span></div> */}
+          {/* <div className="mentorName"> */}
+            {/* <span className="mentor-name">{this.props.match.params.user}</span> */}
+            
+          {/* </div> */}
          
+         <div className = "mentorBody">
           <div>
 
+            {/* input task */}
             <div className = "assignForm">
+              
               <input className="taskName" id="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
+              
               <input id="date" type="date" name="date" required/>
                             
               <Select required
@@ -189,26 +194,39 @@ class Mentor extends Component {
               />
 
               <input className="assignTask" type="button" value="Assign Task" onClick={this.handleSubmit.bind(this)} />
+            
             </div>
-            <div className="addMembers">
+            {/* end of input task */}
+
+
+            {/* <div className="addMembers">
               <input id="member" type="text" placeholder="add member"/>
               <input type="button" value="Add Members" onClick={this.addMembers.bind(this)} />
+            </div> */}
+          </div>
+
+
+         {/*listsSection */}
+          <div className="listsSectionContainer">
+            <div className="listsSection">
+              <div className="listHeadings">
+                <div className="listHeading">Assigned Tasks</div>
+                <div className="listHeading">Tasks ready for review</div>
+              </div>
+
+            <div className="lists">
+              <div className="tasksContainer">
+                  <ShowTasks func={this.handleadd} show={this.state.show} editFunc={this. handleEdit} deleteFunc={this.handleDelete} />
+
+              </div>
+                <div className="tasksContainer">
+                <SubmittedTasks func={this.handleComplete}/>
+                </div>
             </div>
-
-          </div>
-          <div className="listHeadings">
-            <div className="listHeading">Assigned Tasks</div>
-            <div className="listHeading">Tasks ready for review</div>
-          </div>
-
-         <div className="lists">
-          <div className="tasksContainer">
-              <ShowTasks func={this.handleadd} show={this.state.show} editFunc={this. handleEdit} deleteFunc={this.handleDelete} />
-
-          </div>
-            <div className="tasksContainer">
-            <SubmittedTasks func={this.handleComplete}/>
             </div>
+         </div>
+         {/* End of listsSection */}
+
          </div>
         </div>
       )

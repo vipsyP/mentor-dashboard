@@ -4,15 +4,23 @@
   /* margin-right: 1%; */
   max-height: 100px;
   font-family: 'Roboto', sans-serif;
+
+
+}
+
+.tasks {
+  /* height: 70vh;
+  min-height: 100%;
+  overflow: scroll; */
 }
 
 .tasksPerUser{
-  /* background: #bebebe; */
-  border: 1px solid #424242;
+  background: #E1BEE7;
+  /* border: 1px solid #424242; */
   /* border: 1px solid #bebebe; */
       /* border: 1px solid #eb4662; */
 
-  border-radius: 7px;
+  border-radius: 2px;
   padding-bottom: 1px;
   font-size: 15px;
   /* color: white; */
@@ -37,11 +45,11 @@
 }
 
 .task {
-border: 1px solid #424242;
+/* border: 1px solid #424242; */
   /* border: 1px solid #bebebe; */
       /* border: 1px solid #eb4662; */
-  /* background: white; */
-  border-radius: 5px;
+  background: white;
+  border-radius: 3px;
   padding: 20px 10px;
   padding-top: 5px;
   padding-bottom: 7px;

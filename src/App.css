@@ -45,14 +45,6 @@
   font-size: 1.5em;
   color: white;
 }
-.mentorName{
-  display:flex;
-  background-color: #bebebe;
-  margin-top: 10px;
-  padding-bottom: 60px;
-  padding-left:5px;
-  
-}
 
 .mentee-name,.mentor-name {
   left: 15px;
@@ -61,20 +53,18 @@
 } 
 
 
-
 .logout-button{
-  width:20%;
-  background-color: #20B2AA; 
+  width:100%;
+  width:65px;
+  background-color: #4CAF50; /* Green */
   color: white;
   text-align: center;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: 4px 0px;
 
   cursor: pointer;
-  border-radius: 7px;
-  margin-left: 12px;
-  margin-top: 7px;
-  margin-bottom: 10px;
+  border-radius: 3px;
+  margin-left: 0px;
   color: white;
   padding: 10px 7px;
   border: none;
