@@ -6,6 +6,7 @@ import './App.css';
 import './Mentor.css';
 import './Mentee.css';
 import './ShowTasks.css';
+import './SubmittedTasks.css';
 import './LoginSignup.css';
 import Mentor from './components/Mentor';
 import Mentee from './components/Mentee';

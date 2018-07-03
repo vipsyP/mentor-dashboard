@@ -137,7 +137,7 @@
     width: 100px;
 }
 
-.submitForReview{
+.submitForReview, {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -155,5 +155,7 @@
     /* border: 2px solid #eb4662; */
     border: 2px solid #eb4662;
 }
+
+
   
 /* .button, .assignTask  */

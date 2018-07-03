@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditForm from './EditForm';
 import { Link, Redirect } from 'react-router-dom';
+import logo from '../delete.png';
 
 class ShowTasks extends Component {
     constructor(props) {
@@ -18,9 +19,9 @@ class ShowTasks extends Component {
 
     }
     handleEdit(e, id) {
-        console.log(e.currentTarget.previousSibling.innerText);
+        console.log("edittext text: "+e.currentTarget.innerText);
         console.log(id);
-        let task = e.currentTarget.previousSibling.innerText
+        let task = e.currentTarget.innerText
             fetch('http://localhost:4000/task/updatetask?task='+task+'&id='+id,{
                 method:'POST'
             })
@@ -71,7 +72,15 @@ class ShowTasks extends Component {
     }
 
 
-
+    clicked() {
+        console.log("clicked");
+    }
+    focused() {
+        console.log("focused");
+    }
+    blurred() {
+        console.log("blurred");
+    }
     getTasks(res) {
         console.log(res);
         // var taskList=[],members=[],date=[];
@@ -109,23 +118,25 @@ class ShowTasks extends Component {
                         <div className="tasksPerUser">
                             <div className="member">{item.member}</div>{
                                 item.tasks.map((val, i) => {
-// <<<<<<< HEAD
-                                    return (<div className = "task">
-                                       
-                                        <span className="due_date">Due date: {val.dueDate}</span>
-                                        <div className="buttons">
-                                            <span contenteditable="true">{val.task}</span>
-                                            <input  className = "button" type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" />
-                                            <input  className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
-{/* =======
-                                    return (<div className = "task">
-                                        <span>{val.task}<span className="due_date">Due date: {val.dueDate}</span></span>
-                                        <div className="buttons">
-                                            <input className = "button" type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
-                                            {this.state.edit && this.state.id === val.id ? <EditForm id={val.id} /> : ""}
-                                            <input className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
->>>>>>> ui-updates */}
-                                        </div>
+
+                                    return (
+
+                                        <div className = "task">
+
+                                            <div className="deleteContainer">
+                                                <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
+                                            </div>
+                                            
+                                            <div className="taskNameContainer">
+                                                <p contenteditable="true" onBlur={(e) => this.handleEdit(e, val.id)}>{val.task}</p>
+                                            </div>
+
+
+                                                    {/* <input  className = "button" type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" /> */}
+                                                    {/* <input  className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" /> */}
+                                                    {/* <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/> */}
+
+                                                <span className="due_date">Due date: {val.dueDate}</span>
                                     </div>)
                                 })
                             }

@@ -1,0 +1,36 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .taskNameContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+    background-color: white; 
+    color: black; 
+    /* border: 2px solid #eb4662; */
+
+}
+
+.button.one {
+    border: 2px solid gray;
+}
+.button.two {
+    border: 2px solid gray;
+}
