@@ -104,11 +104,11 @@ class ShowTasks extends Component {
                             <div className="member">{item.member}</div>{
                                 item.tasks.map((val, i) => {
                                     return (<div className = "task">
-                                        <span>{val.task}<span className="due-date">Due date: {val.dueDate}</span></span>
+                                        <span>{val.task}<span className="due_date">Due date: {val.dueDate}</span></span>
                                         <div className="buttons">
-                                            <input type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
+                                            <input className = "button" type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
                                             {this.state.edit && this.state.id === val.id ? <EditForm id={val.id} /> : ""}
-                                            <input onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
+                                            <input className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
                                         </div>
                                     </div>)
                                 })

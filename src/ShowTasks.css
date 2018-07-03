@@ -44,8 +44,12 @@
   border-radius: 5px;
   padding: 15px 10px;
   margin: 4px 4px 3px 4px;
+  color: gray;
   /* margin-top: 0px; */
   /* margin-top: 10px;
   margin-bottom: 10px; */
 }
 
+.due_date {
+  color: gray;
+}
