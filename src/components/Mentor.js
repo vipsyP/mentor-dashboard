@@ -3,6 +3,9 @@ import ShowTasks from './ShowTasks';
 import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+// import LoginSignup from './Login-Signup'; 
+import {Redirect,Link} from 'react-router-dom';
+import Router from 'react-router-dom';
 
 class Mentor extends Component {
     constructor(props,{match}){
@@ -12,7 +15,30 @@ class Mentor extends Component {
             done: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
+
+    logOut(event){
+      console.log("event in logout points to -",event);
+      const self=this;
+      fetch("http://localhost:4000/logout", {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                  "content-type": "application/json"
+              },
+              // body: JSON.stringify(signupdata)
+          }).then(function (response) {
+              console.log('data in logout', response);
+              return response.json();
+          }).then(response => {
+              self.setState({
+                  logoutStatus: response.status    
+              });
+          }).catch(err => {
+              console.log(err);
+          })
+  }
     handleSubmit(){
         // console.log("working");
         // e.preventDefault();
@@ -39,8 +65,13 @@ class Mentor extends Component {
       const { selectedOption } = this.state;
       return (
         <div className="container">
+        {this.state.logoutStatus ?  <Redirect to = {
+                        {
+                            pathname: "/" 
+                        }}/>:""} 
           <div className="header"><span>Mentors Dashboard</span></div>
-          <div className="mentorName"><span>{this.props.match.params.user}</span></div>
+          <div className="mentorName"><span className="mentor-name">{this.props.match.params.user}</span></div>
+          <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
           <div>
             <form  onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
               <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />

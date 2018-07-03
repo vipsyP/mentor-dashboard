@@ -39,26 +39,55 @@
   border-top-right-radius: 8px;
   transform: translateY(10%);
   font-size: 14px;
-  position: relative;
+  /* position: relative; */
 }
 .header span{
-  position: absolute;
+  /* position: absolute; */
   left: 395px;
   top: 9px;
   font-size: 1.5em;
   color: white;
 }
 .mentorName{
+  display:flex;
   background-color: #bebebe;
   margin-top: 10px;
   padding-bottom: 60px;
-  position: relative;
+  padding-left:5px;
+  
 }
-.mentorName span {
+/* .mentorName span {
   position: absolute;
   left: 15px;
   top: 21px;
+} */
+
+.mentee-name,.mentor-name {
+  left: 15px;
+  top: 21px;
+  width: 75%;
+} 
+
+
+
+.logout-button{
+  width:20%;
+  background-color: #20B2AA; 
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px;
+
+  cursor: pointer;
+  border-radius: 7px;
+  margin-left: 12px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  color: white;
+  padding: 10px 7px;
+  border: none;
 }
+
 form{
   margin-top: 10px;
 }
