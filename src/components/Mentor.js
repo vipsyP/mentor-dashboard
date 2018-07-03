@@ -130,36 +130,47 @@ class Mentor extends Component {
       const { selectedOption } = this.state;
       return (
         <div className="container">
-          <div className="header"><span>Mentors Dashboard</span></div>
+          <div className="header"><span>Mentor Dashboard</span></div>
           <div className="mentorName"><span>{this.props.match.params.user}</span></div>
           <div>
-            {/* <form  > */}
+
+            <div className = "assignForm">
               <input className="taskName" id="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
               <input id="date" type="date" name="date" required/>
                             
+{/* =======
+            <form className = "assignForm" onSubmit={this.handleSubmit.bind(this)} method="post" action="http://localhost:4000/mentor/task/create">
+              <input className="taskName" type="text" name="taskName"  placeholder="Enter a new task.." required />
+              <input className="date"id="date" type="date" name="date" required/>
+>>>>>>> ui-updates */}
               <Select required
+                className = "teamMember"
                 name="teamMember"
                 id="selectedMember"
                 value={selectedOption}
                 onChange={this.handleChange}
                 options={this.state.mem}
               />
-              <input className="submit" type="button" value="submit" onClick ={this.handleSubmit.bind(this)}  />
-            {/* </form> */}
+
+              <input className="assignTask" type="submit" value="Assign Task" />
+            </div>
             <div className="addMembers">
               <input id="member" type="text" placeholder="add member"/>
               <input type="button" value="Add Members" onClick={this.addMembers.bind(this)} />
             </div>
+
           </div>
-          <div className="lists">
-            <div className="taskList">Assigned Tasks</div>
-            <div className="review">Tasks ready for review</div>
+          <div className="listHeadings">
+            <div className="listHeading">Assigned Tasks</div>
+            <div className="listHeading">Tasks ready for review</div>
           </div>
-         <div>
-          <div className="allTasks">
+
+         <div className="lists">
+          <div className="tasksContainer">
               <ShowTasks func={this.handleadd} show={this.state.show} editFunc={this. handleEdit} deleteFunc={this.handleDelete} />
+
           </div>
-            <div className="submittedTasks">
+            <div className="tasksContainer">
             <SubmittedTasks func={this.handleComplete}/>
             </div>
          </div>

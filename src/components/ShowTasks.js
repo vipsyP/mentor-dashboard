@@ -102,23 +102,31 @@ class ShowTasks extends Component {
         console.log(taskList);
         console.log("Done: " + this.state.done);
         return (
-            <div>{
+            <div className= "tasks">{
                 taskList.map((item, i) => {
                     // console.log("inside map"+item);
                     return (
-                        <div className="assignedTasks">
+                        <div className="tasksPerUser">
                             <div className="member">{item.member}</div>{
                                 item.tasks.map((val, i) => {
-                                    return <div>
+// <<<<<<< HEAD
+                                    return (<div className = "task">
                                        
-                                        <span className="due-date">Due date: {val.dueDate}</span>
-                                        <div className="editDelete">
+                                        <span className="due_date">Due date: {val.dueDate}</span>
+                                        <div className="buttons">
                                             <span contenteditable="true">{val.task}</span>
-                                            <input type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" />
-                                            <input onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
+                                            <input  className = "button" type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" />
+                                            <input  className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
+{/* =======
+                                    return (<div className = "task">
+                                        <span>{val.task}<span className="due_date">Due date: {val.dueDate}</span></span>
+                                        <div className="buttons">
+                                            <input className = "button" type="button" onClick={this.handleEdit.bind(this, val.id)} value="Edit" />
+                                            {this.state.edit && this.state.id === val.id ? <EditForm id={val.id} /> : ""}
+                                            <input className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" />
+>>>>>>> ui-updates */}
                                         </div>
-                                        <hr />
-                                    </div>
+                                    </div>)
                                 })
                             }
                         </div>

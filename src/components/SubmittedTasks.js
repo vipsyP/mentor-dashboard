@@ -88,26 +88,35 @@ class SubmittedTasks extends Component {
     // let members = this.state.members;
     // let date = this.state.date;
     console.log(taskList);
+    return (
+    <div className= "tasks">
+    {
+    taskList.map((item,i)=>{
         return(
-            <div>{
-                taskList.map((item,i)=>{
-                    // console.log("inside map"+item);
-                    return (
-                    <div className="assignedTasks">
-                        <div className="member">{item.member}</div>{
+            <div className="tasksPerUser">
+                <div className="member">{item.member}</div>
+                    
+
+                        {
                         item.tasks.map((val,i)=>{
-                           return ( <div><div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
+
+                           return ( <div className = "task"><div><span>{val.task}</span><span className="due-date">Due date: {val.dueDate}</span></div>
                             <div className="buttons"><input type="button" onClick={this.handleReassign.bind(this,val.ids)} value="improvement needed"/><input type="button" onClick={this.handleSubmit.bind(this,val.ids)} className="complete"value="completed"/></div>
                            </div>)  
+
                         })
                         }
-                    </div>
-                    )
-                })
 
-            }
+                    
+
+
+            
             </div>            
         )
+    })
+    }
+    </div>
+)
   }
 }
 

@@ -55,18 +55,18 @@ class Mentee extends Component {
         <div className="container">
           <div className="header"><span>Mentee Dashboard</span></div>
           <div className="mentorName"><span>{this.props.match.params.user}</span></div>
-          <div className="lists">
-            <div className="menteeTaskList">Assigned Tasks</div>
+          <div className="menteeListHeadings">
+            <div className="menteeListHeading">Assigned Tasks</div>
           </div>
-          <div>{
+          <div className="menteeTasksContainer">{
               menteeTaskList.map((item,i)=>{
                 return (
-                <div className="menteeTasks">
-                    <div id="menteeTasks">
-                        <span>{item.task}</span>
-                        <span className="due_date">{item.dueDate}</span>
+                <div className="menteeTaskContainer">
+                    <div class="menteeTask">
+                        <div className="menteeTaskName">{item.task}</div>
+                        <div className="dueDate">{item.dueDate}</div>
                     </div>
-                    <input id="submitButton" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
+                    <input class="submitForReview" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
                 </div>
                 )
               })
