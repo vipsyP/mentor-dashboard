@@ -9,11 +9,17 @@
 
 }
 
+.tasksContainer.mentee{
+  width: 99%;
+
+}
+
 .tasks {
   /* height: 70vh;
   min-height: 100%;
   overflow: scroll; */
 }
+
 
 .tasksPerUser{
   background: #E1BEE7;
@@ -24,7 +30,7 @@
   /* width: 98%;
   margin-left: auto;
   margin-right: auto; */
-  border-radius: 0px;
+  border-radius: 3px;
   padding-bottom: 1px;
   font-size: 15px;
   /* color: white; */
@@ -38,15 +44,21 @@
 .member {
   /* color: white;   */
 
-  color: black;
+  color: rgb(68, 68, 68);
   margin:0;
   padding:0;
-  font-weight: 300;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 15px;
+
   text-align: start;
   padding-left: 20px;
   padding-top: 5px;
   padding-bottom: 0px;
+  line-height: 20px;
+}
+
+.member.mentee{
+  color: #e2e4e6;
 }
 
 .task {
@@ -59,7 +71,9 @@
   padding-top: 5px;
   padding-bottom: 7px;
   margin: 9px 9px 9px 9px;
-  color: gray;
+  /* color: gray; */
+  color: #444;
+  
   /* margin-top: 0px; */
   /* margin-top: 10px;
   margin-bottom: 10px; */
@@ -67,10 +81,25 @@
 
 .dueDate {
   /* padding: 5px 0px 5px 20px; */
-
+  
   margin-top: 0px;
   margin-right:0px;
-  color: gray;
+  color: #8c8c8c;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.dueDate mentee{
+  /* padding: 5px 0px 5px 20px; */
+  
+  margin-right:5px;
+}
+
+.dueDate mentor{
+  /* padding: 5px 0px 5px 20px; */
+  
+  padding-bottom:5px;
 }
 
 .taskNameContainer {
@@ -78,6 +107,13 @@
   flex-direction: row;
   justify-content: flex-start;
 }
+.taskNameContainer.mentor.submitted{
+  margin-bottom: 23px;
+}
+.taskNameContainer.mentee{
+  margin-bottom: 23px;
+}
+
 .deleteContainer {
   display: flex;
   flex-direction: row;
@@ -85,8 +121,9 @@
 }
 
 .delete {
-  opacity: 0.6;
+  opacity: 0.55;
   width: 12px;
   height: 12px;
+  margin-top: 3px;
   /* background: #eb4662; */
 }

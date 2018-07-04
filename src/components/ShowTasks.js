@@ -136,7 +136,7 @@ class ShowTasks extends Component {
                                                     {/* <input  className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" /> */}
                                                     {/* <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/> */}
                                             <div className="dueDateContainer">
-                                                <span className="dueDate">Due date: {val.dueDate}</span>
+                                                <span className="dueDate mentor">Due date: {val.dueDate}</span>
                                             </div>
                                     </div>)
                                 })

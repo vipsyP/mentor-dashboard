@@ -161,8 +161,17 @@ class Mentor extends Component {
         <div className="topBar">
         <span className = "mentorNameLabel">Mentor:</span><span className = "mentorName">{this.props.match.params.user}</span>
               <h1 className = "topBarHeading"> MyTeam </h1> 
-              <div className = "placeholder">
-              <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> </div>
+			  <div className = "placeholder" ></div>              
+			<div className = "addMembers" >
+				<input className = "memberName" id="member" type="text" placeholder="add member"/>
+            	<input className = "button addMember" type="button" value="Add Member" onClick={this.addMembers.bind(this)} />
+				<button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> 
+		   </div> 
+
+              
+              
+			  
+
           </div>
         {this.state.logoutStatus ?  <Redirect to = {
                         {
@@ -198,11 +207,6 @@ class Mentor extends Component {
             </div>
             {/* end of input task */}
 
-
-            {/* <div className="addMembers">
-              <input id="member" type="text" placeholder="add member"/>
-              <input type="button" value="Add Members" onClick={this.addMembers.bind(this)} />
-            </div> */}
           </div>
 
 

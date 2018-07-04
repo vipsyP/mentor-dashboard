@@ -19,12 +19,18 @@
   }
   
   
-  .topBarHeading {
+  .topBarHeadingPlaceholder {
     width:60%;
     text-align: right;
     margin-left: 16px;
     color: white;
     margin-right: 16vw;
+  }
+
+  .topBarHeading {
+    position: absolute;
+    left: 47%;
+    color: white;
     font-size: 18px;
     font-weight: normal;
   }

@@ -10,7 +10,7 @@
     justify-content: flex-start;
   }
   
-  .button {
+  .button{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -21,16 +21,18 @@
     font-size: 12px;
     margin: 4px 2px;
     cursor: pointer;
-
+    border-radius: 3px;
     background-color: white; 
-    color: black; 
+    color: white; 
     /* border: 2px solid #eb4662; */
 
 }
 
 .button.one {
-    border: 2px solid gray;
+    /* border: 2px solid gray; */
+    background-color: #61bd4f; /* Green */
 }
 .button.two {
-    border: 2px solid gray;
+    /* border: 2px solid gray; */
+    background-color: #61bd4f; /* Green */
 }

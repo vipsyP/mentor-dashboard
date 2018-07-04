@@ -108,7 +108,7 @@ class SubmittedTasks extends Component {
 
                                 </div>
 
-                                <div className = "taskNameContainer">
+                                <div className = "taskNameContainer mentor submitted">
                                     <span>{val.task}</span>
                                 </div>
 

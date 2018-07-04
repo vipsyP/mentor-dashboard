@@ -82,7 +82,7 @@ class Mentee extends Component {
         <div className="rootContainer">
 
         <div className="topBar">
-        <span className = "mentorNameLabel">Mentee:</span><span className = "mentorName">{this.props.match.params.user}</span>
+        <span className = "mentorNameLabel">Mentee:</span><span className = "mentorName mentee">{this.props.match.params.user}</span>
               <h1 className = "topBarHeading"> MyTeam </h1> 
               <div className = "placeholder">
               <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> </div>
@@ -98,28 +98,46 @@ class Mentee extends Component {
           <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
           </div> */}
           
-          <div className="menteeListHeadings">
-          {/* <div className="lists"> */}
-          <div className="menteeListHeading">Assigned Tasks</div>
+          <div className = "mentorBody">
+
+              <div className="listsSectionContainer">
+            <div className="listsSection">
+          <div className="listHeadings">
+            <div className="listHeading mentee">Assigned Tasks</div>
           </div>
-          <div className="menteeTasksContainer">{
+
+
+    <div className="lists">
+    <div className="tasksContainer mentee">
+        <div className="tasks">
+            <div className="tasksPerUser">
+            <div className="member mentee">{"Placeholder"}</div>{
               menteeTaskList.map((item,i)=>{
                 return (
-                <div className="task">
-                    <div className="buttons">
-                        <input className="submitForReview" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
-                    </div>
 
-                    <div class="menteeTask">
-                        <div className="menteeTaskName">{item.task}</div>
-                    </div>
-                    <div className="dueDateContainer">
-                        <div className="dueDate">{item.dueDate}</div>
-                    </div>
-                </div>
-                )
+                        <div className="task">
+                            <div className="buttons">
+                                <input className="button submitForReview" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
+                            </div>
+
+                            <div class="taskNameContainer mentee">
+                                <div className="menteeTaskName">{item.task}</div>
+                            </div>
+                            <div className="dueDateContainer">
+                                <div className="dueDate mentee">{item.dueDate}</div>
+                            </div>
+                        </div>                )
               })
-          }</div>
+          }
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+          
+          
+          </div>
         </div>
       )
     }
