@@ -13,13 +13,13 @@ class LoginSignup extends Component {
             // userLogin:{
             loginEmail: "",
             loginPassword: "",
-            loginAs: "",
+            loginAs: "Mentee",
             // },
 
             // userSignUp:{
             signupUsername: "",
             signupEmail: "",
-            signupAs: "",
+            signupAs: "Mentee",
             signupPassword: "",
             signupConfirmPassword: "",
             // },
@@ -106,11 +106,19 @@ class LoginSignup extends Component {
         }
         else {
              console.log("this.state.setLoginAs",this.state.loginAs);
+            //  let logindata;
+            //  if(this.state.loginAs==""){
+            //      this.setState({
+            //         loginAs:"Mentee"
+            //      })
+            //  }
+            //  else{
             let logindata = {
                 username: this.state.loginEmail,
                 password: this.state.loginPassword,
                 role:this.state.loginAs
             }
+        // }
             console.log('logindata',logindata);
             // let username=this.state.loginEmail;
             // let password=this.state.loginPassword
@@ -127,11 +135,17 @@ class LoginSignup extends Component {
                 return response.json();
             }).then(response => {
                 console.log("inside login response.json =",response);
-                self.setState({
-                    loginStatus: response.status,
-                    userName:response.name,
-                    role:response.role
-                });
+                if(response.message!=null){
+                    alert(response.message);
+                }
+                else{
+                    self.setState({
+                        loginStatus: response.status,
+                        userName:response.name,
+                        role:response.role
+                    });
+                }
+                
             }).catch(err => {
                 console.log(err);
             })
@@ -185,8 +199,11 @@ class LoginSignup extends Component {
                 //     signupUserName:response.name,
                 //     signupRole:response.role
                 // });
-
-                
+                console.log("inside signup response.message",response.message);
+                if(response.message!=null){
+                    alert(response.message);
+                }
+                else{
                 self.setState({
                     signupStatus:response.status,
                     loginEmail:this.state.signupEmail,
@@ -196,7 +213,7 @@ class LoginSignup extends Component {
                     self.state.signupStatus? self.validateLogin():"";
                 // self.validateLogin();
                 
-
+                }
             }).catch(err => {
                 console.log(err);
             })
@@ -227,8 +244,14 @@ class LoginSignup extends Component {
 
 
             <select name = "role" className = "login-dropdown" onChange = {this.setLoginAs} placeholder="As a" >
+{/* <<<<<<< HEAD
                 <option value = "Mentee" > I 'm a Mentee</option>
                 <option value = "Mentor" > I 'm a Mentor</option> 
+======= */}
+            
+            <option value = "Mentee" selected> I'm a Mentee</option>
+             <option value = "Mentor" > I'm a Mentor</option> 
+{/* >>>>>>> 926d1c6066c3d648bd783e1c94fad03c42a9553f */}
              </select >
 
             <div>
@@ -262,7 +285,7 @@ class LoginSignup extends Component {
                 <input className = "signup-field" type = "text" onChange = {this.setSignupEmail} name = "email" placeholder = "E-mail" / >
                 </div>
 
-                <select onChange = {this.setSignupAs} name = "role" className = "signup-dropdown" >
+                <select onChange = {this.setSignupAs} name = "role" className = "signup-dropdown" required>
                 <option value = "Mentee" > I 'm a Mentee</option> 
                 <option value = "Mentor" > I 'm a Mentor</option> </select>
 

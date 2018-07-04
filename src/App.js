@@ -13,6 +13,7 @@ import Mentee from './components/Mentee';
 import Error from './components/Error';
 import LoginSignup from './components/Login-Signup'; 
 import EditForm from './components/EditForm';
+// import { withRouter } from 'react-router';
 import {BrowserRouter, Route, Switch,Redirect,Prompt} from 'react-router-dom';
  
 // import LoginSignup from './components/Login-Signup';
@@ -22,7 +23,9 @@ class App extends Component {
     return (
       <BrowserRouter>
           <Switch>
-            <Route path="/" component={LoginSignup} exact strict/>
+            <Route path="/" component={LoginSignup} exact strict>
+
+            </Route>
             <Route path="/mentee/:user" component={Mentee} exact strict/>
             <Route path="/mentor/:user" component={Mentor} exact strict/>
             <Route path="/tasks/edit/:id" component={EditForm} exact strict/>

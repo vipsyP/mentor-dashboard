@@ -11,19 +11,27 @@ class ShowTasks extends Component {
             id: '',
             done: false,
             editfunc : this.props.handleEdit,
-            deleteFunc : this.props.handleDelete
+            deleteFunc : this.props.handleDelete,
             // members : [],
             // date : []
+            authState:true
         }
         console.log(props);
 
     }
     handleEdit(e, id) {
+
+        const self=this;
         console.log("edittext text: "+e.currentTarget.innerText);
+
         console.log(id);
         let task = e.currentTarget.innerText
             fetch('http://localhost:4000/task/updatetask?task='+task+'&id='+id,{
-                method:'POST'
+                method: "POST",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            } 
             })
             .then(function(response) {
                 return response.json();
@@ -31,6 +39,9 @@ class ShowTasks extends Component {
             .then(response => {
                 console.log(response);
                 this.fetchFunc();
+                self.setState({
+                    authState:response.status 
+                  });
             }) 
             .catch(function(err) {
                 console.log('Fetch Error :-S', err);
@@ -38,15 +49,25 @@ class ShowTasks extends Component {
         this.props.handleEdit
     }
     handleDelete(id) {
+        const self=this;
         console.log(id);
-        fetch('http://localhost:4000/task/deletetask?id=' + id)
-
+        fetch('http://localhost:4000/task/deletetask?id=' + id,{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            } 
+        })
             .then(function (response) {
                 return response.json();
             })
             .then(response => {
                 console.log(response);
                 this.fetchFunc()
+                self.setState({
+                    authState:response.status 
+                  });
+
             })
             .catch(function (err) {
                 console.log('Fetch Error :-S', err);
@@ -58,12 +79,24 @@ class ShowTasks extends Component {
             this.props.func
     }
     fetchFunc(){
-        fetch('http://localhost:4000/mentor/tasks')
+        const self=this;
+        fetch('http://localhost:4000/mentor/tasks',{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+            
+        })
         .then(function (response) {
             return response.json();
         })
         .then(response => {
-            console.log(response);
+            console.log("inside mentor tasks response",response);
+            console.log("inside mentor tasks response.status=",response.status);
+            self.setState({
+                authState:response.status 
+              });
             this.getTasks(response)
         })
         .catch(function (err) {
@@ -107,6 +140,9 @@ class ShowTasks extends Component {
 
     }
     render() {
+        if(this.state.authState==false){
+            return <Redirect to = "/" />
+          }
         let taskList = this.state.tasks;
         console.log(taskList);
         console.log("Done: " + this.state.done);

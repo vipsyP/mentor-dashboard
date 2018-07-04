@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Redirect,Link} from 'react-router-dom';
+// import { withRouter } from 'react-router';
+// import {Redirect,Link} from 'react-router-dom';
 import Router from 'react-router-dom';
+import {BrowserRouter, Route, Switch,Redirect,Prompt} from 'react-router-dom';
 import ShowTasks from './ShowTasks';
 import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
@@ -19,7 +21,8 @@ class Mentor extends Component {
           edit: false,
           delete: false,
           show: false,
-          done: false
+          done: false,
+          authState:true
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -43,16 +46,24 @@ class Mentor extends Component {
       }));
     }
     addMembers(){
+      const self=this;
       console.log(document.getElementById("member").value);
       let member = document.getElementById("member").value;
       fetch('http://localhost:4000/mentee/add?member='+member,{
-        method:"post"
+        method:'POST',
+        credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+          })
+      .then(function (response) {
+          return response.json();
       })
-      // .then(function (response) {
-      //     return response.json();
-      // })
       .then(response => {
           console.log(response);
+          self.setState({
+            authState:response.status 
+          });
       })
       .catch(function (err) {
           console.log('Fetch Error :-S', err);
@@ -88,17 +99,33 @@ class Mentor extends Component {
       //  console.log(document.getElementById("date").value);
        let date = document.getElementById("date").value
       //  console.log(document.getElementsByName("teamMember")[0].value);
-       let member = document.getElementsByName("teamMember")[0].value
-       fetch("http://localhost:4000/mentor/task/create?task="+task+'&date='+date+'&member='+member,{
-            method:'POST'
+       let member = document.getElementsByName("teamMember")[0].value;
+       let data={
+         task:task,
+         date:date,
+         member:member
+       }
+      //  fetch("http://localhost:4000/mentor/task/create?task="+task+'&date='+date+'&member='+member,{
+        const self=this;
+        fetch("http://localhost:4000/mentor/task/create",{
+            method:'POST',
+            credentials: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(data)
         })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
-            console.log(response);
-           
-            this.getUpdatedTask()
+            console.log("response after successful task insertion",response);
+            self.setState({
+              authState:response.status 
+            });
+            console.log("response after successful task insertion authState is ",this.state.authState);
+            
+             this.getUpdatedTask()
         }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
@@ -108,6 +135,13 @@ class Mentor extends Component {
     }
 
     getUpdatedTask(){
+      // debugger;
+      // {(this.state.authState==false)? <Route render={() => <Redirect to = {
+      //   {
+      //       pathname: "/" 
+      //   }}/>}/>:this.setState({
+      //     show: true
+      //   })} 
       this.setState({
         show: true
       });
@@ -129,7 +163,13 @@ class Mentor extends Component {
       }
     }
     componentDidMount(){
-      fetch('http://localhost:4000/addMembers')
+      fetch('http://localhost:4000/addMembers',{
+        method:'GET',
+            credentials: "include",
+                headers: {
+                    "content-type": "application/json"
+                },
+      })
                   .then(function (response) {
                       return response.json();
                   })
@@ -154,8 +194,13 @@ class Mentor extends Component {
       
     }
     render() {
+      // const {authState}=this.state.authState;
+      if(this.state.authState==false){
+        return <Redirect to = "/" />
+      }
       const { selectedOption } = this.state;
       return (
+
         <div className="rootContainer">
         
         <div className="topBar">
@@ -184,6 +229,7 @@ class Mentor extends Component {
           {/* </div> */}
          
          <div className = "mentorBody">
+
           <div>
 
             {/* input task */}
