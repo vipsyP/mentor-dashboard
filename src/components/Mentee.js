@@ -79,15 +79,24 @@ class Mentee extends Component {
     render() {
         let menteeTaskList = this.state.menteeTasks;
       return (
-        <div className="container">
+        <div className="rootContainer">
+
+        <div className="topBar">
+        <span className = "mentorNameLabel">Mentee:</span><span className = "mentorName">{this.props.match.params.user}</span>
+              <h1 className = "topBarHeading"> MyTeam </h1> 
+              <div className = "placeholder">
+              <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> </div>
+          </div>
+
+
         {this.state.logoutStatus ?  <Redirect to = {
                         {
                             pathname: "/" 
                         }}/>:""} 
-          <div className="header"><span>Mentee Dashboard</span></div>
-          <div className="mentorName"><span className="mentee-name">{this.props.match.params.user}</span>
+          {/* <div className="header"><span>Mentee Dashboard</span></div> */}
+          {/* <div className="mentorName"><span className="mentee-name">{this.props.match.params.user}</span>
           <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>
-          </div>
+          </div> */}
           
           <div className="menteeListHeadings">
           {/* <div className="lists"> */}

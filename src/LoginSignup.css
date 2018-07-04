@@ -1,5 +1,5 @@
 .rootContainer {
-  background: #9C27B0;
+  background: #43812f;
   height: 100vh;
   font-family: roboto;
 }
@@ -13,7 +13,7 @@
     vertical-align: middle;
     /* line-height: 39px; */
     /* border-radius: 5px; */
-    background-color:#9C27B0;
+    background-color:#43812f;
     padding-bottom: 5px;
     padding-top: 3px;
   }
@@ -90,7 +90,8 @@
     display: flex;
     flex-direction: row;
     align-content: space-around;
-    background: #BA68C8;
+    background: #519839;
+    /* background: white; */
     height: 88%;
   }
   
@@ -110,6 +111,7 @@
 
     max-width: 230px;
     background: #E1BEE7;
+    background: #e2e4e6;
     width: 23%;
     align-items: center;
     margin-top: 20px;
