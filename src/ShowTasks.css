@@ -65,6 +65,7 @@
 /* border: 1px solid #424242; */
   /* border: 1px solid #bebebe; */
       /* border: 1px solid #eb4662; */
+
   background: white;
   border-radius: 3px;
   padding: 20px 10px;
@@ -77,6 +78,30 @@
   /* margin-top: 0px; */
   /* margin-top: 10px;
   margin-bottom: 10px; */
+}
+
+.task.mentor.submitted {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.task.mentor.assigned {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.horizontalContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.verticalContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .dueDate {
@@ -108,12 +133,22 @@
   justify-content: flex-start;
 }
 .taskNameContainer.mentor.submitted{
-  margin-bottom: 23px;
+  margin-bottom: 0px;
+  align-content: center;
 }
 .taskNameContainer.mentee{
   margin-bottom: 23px;
 }
 
+.taskNameContainer div{
+  margin-top: 17px;
+  /* text-align: center; */
+}
+.taskNameContainer.mentee div{
+  margin-top: 17px;
+  padding-top: 5px;
+  /* text-align: center; */
+}
 .deleteContainer {
   display: flex;
   flex-direction: row;

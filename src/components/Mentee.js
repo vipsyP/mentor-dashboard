@@ -141,17 +141,22 @@ class Mentee extends Component {
               menteeTaskList.map((item,i)=>{
                 return (
 
-                        <div className="task">
-                            <div className="buttons">
-                                <input className="button submitForReview" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
-                            </div>
+                        <div className="task horizontalContainer">
 
                             <div class="taskNameContainer mentee">
                                 <div className="menteeTaskName">{item.task}</div>
                             </div>
+
+
+                        <div className = "verticalContainer">
+                            <div className="buttons">
+                                <input className="button submitForReview" type="button"  value = {item.submitted? "Submitted" : "Submit for review"} onClick = {this.handleClick.bind(this,item._id)} /> 
+                            </div>
+
                             <div className="dueDateContainer">
                                 <div className="dueDate mentee">{item.dueDate}</div>
                             </div>
+                        </div>
                         </div>                )
               })
           }

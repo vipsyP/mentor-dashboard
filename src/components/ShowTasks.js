@@ -157,23 +157,26 @@ class ShowTasks extends Component {
 
                                     return (
 
-                                        <div className = "task">
+                                        <div className = "task mentor assigned">
+                                            
+                                            <div className="taskNameContainer mentor submitted">
+                                                <p contenteditable="true" onBlur={(e) => this.handleEdit(e, val.id)}>{val.task}</p>
+                                            </div>
 
+                                        <div className = "verticalContainer">
                                             <div className="deleteContainer">
                                                 <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
                                             </div>
-                                            
-                                            <div className="taskNameContainer">
-                                                <p contenteditable="true" onBlur={(e) => this.handleEdit(e, val.id)}>{val.task}</p>
+                                            <div className="dueDateContainer">
+                                                <span className="dueDate mentor">Due date: {val.dueDate}</span>
                                             </div>
+                                        </div>
 
 
                                                     {/* <input  className = "button" type="button" onClick={(e) => this.handleEdit(e, val.id)} value="Edit" /> */}
                                                     {/* <input  className = "button" onClick={this.handleDelete.bind(this, val.id)} type="button" value="Delete" /> */}
                                                     {/* <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/> */}
-                                            <div className="dueDateContainer">
-                                                <span className="dueDate mentor">Due date: {val.dueDate}</span>
-                                            </div>
+
                                     </div>)
                                 })
                             }
