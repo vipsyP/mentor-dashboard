@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-
+import { Link, Redirect } from 'react-router-dom';
 class SubmittedTasks extends Component {
     constructor(props){
         super(props);
         this.state={
             tasks: [],
             done: false,
-            func : this.props.func
+            func : this.props.func,
+            authState:true
         }
         
        console.log(props);
@@ -16,12 +17,22 @@ class SubmittedTasks extends Component {
         this.fetchData()
     }
     fetchData(){
-        fetch('http://localhost:4000/mentor/tasks')
+        // const self=this;
+        fetch('http://localhost:4000/mentor/tasks',{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
             console.log(response);
+            // self.setState({
+            //     authState:response.status 
+            //   });
             this.getTasks(response)
         }) 
         .catch(function(err) {
@@ -53,13 +64,23 @@ class SubmittedTasks extends Component {
     }
     handleSubmit(id){
         // console.log(id);
-        fetch('http://localhost:4000/mentee/tasks/complete?id='+id)
+        const self=this;
+        fetch('http://localhost:4000/mentee/tasks/complete?id='+id,{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
             console.log(response);
             this.fetchData()
+            self.setState({
+                authState:response.status 
+              });
              
         }) 
         .catch(function(err) {
@@ -69,13 +90,23 @@ class SubmittedTasks extends Component {
     }
     handleReassign(id){
         console.log(id);
-        fetch('http://localhost:4000/mentee/tasks/reassign?id='+id)
+        const self=this;
+        fetch('http://localhost:4000/mentee/tasks/reassign?id='+id,{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
             console.log(response);
             this.fetchData()
+            self.setState({
+                authState:response.status 
+              });
              
         }) 
         .catch(function(err) {
@@ -84,6 +115,9 @@ class SubmittedTasks extends Component {
         this.props.func
     }    
   render() {
+    if(this.state.authState==false){
+        return <Redirect to = "/" />
+      }
     let taskList = this.state.tasks;
     // let members = this.state.members;
     // let date = this.state.date;

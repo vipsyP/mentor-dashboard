@@ -7,7 +7,8 @@ const mongoose = require('mongoose'),
     mongoose.connect("mongodb://myteam:myteam1@ds119171.mlab.com:19171/mentorsdashboard");
 
 var UserSchema = new Schema({
-    username: { type: String, required: true },
+
+    username: { type: String, required: true, unique: false },
     email: {type: String, required: true, index: { unique: true } },
     role: {type: String, required: true},
     password: { type: String, required: true },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 import ReactDOM from 'react-dom';
 import LoginSignup from './Login-Signup'; 
 import {Redirect,Link} from 'react-router-dom';
@@ -12,7 +12,7 @@ class Mentee extends Component {
             submit: false,
             user : props.match.params.user,
             logoutStatus:false,
-            authState:false
+            authState:true
         }
         this.logOut = this.logOut.bind(this);
     }
@@ -40,14 +40,25 @@ class Mentee extends Component {
     }
     
     handleClick(id){
+        const self=this;
         console.log(id);
-        fetch('http://localhost:4000/mentee/tasks/sub?id='+id)
+        fetch('http://localhost:4000/mentee/tasks/sub?id='+id,{
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+
+        })
         .then(function(response) {
             return response.json();
         })
         .then(response => {
              console.log(response);
              this.fetchFunc()
+             self.setState({
+                authState:response.status 
+              });
         }) 
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
@@ -57,6 +68,7 @@ class Mentee extends Component {
           }));
     }
     fetchFunc(){
+        const self=this;
         fetch('http://localhost:4000/mentee/tasks?user='+this.props.match.params.user,{
             method: "GET",
             credentials: "include",
@@ -69,6 +81,9 @@ class Mentee extends Component {
         })
         .then(response => {
             // console.log(response);
+            // self.setState({
+            //     authState:response.status 
+            //   });
             this.getMenteeTasks(response)
         }) 
         .catch(function(err) {
@@ -85,6 +100,9 @@ class Mentee extends Component {
         })
     }
     render() {
+        if(this.state.authState==false){
+            return <Redirect to = "/" />
+          }
         let menteeTaskList = this.state.menteeTasks;
       return (
         <div className="container">

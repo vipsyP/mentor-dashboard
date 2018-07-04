@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import {Redirect,Link} from 'react-router-dom';
+// import { withRouter } from 'react-router';
+// import {Redirect,Link} from 'react-router-dom';
 import Router from 'react-router-dom';
+import {BrowserRouter, Route, Switch,Redirect,Prompt} from 'react-router-dom';
 import ShowTasks from './ShowTasks';
 import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
@@ -21,7 +22,7 @@ class Mentor extends Component {
           delete: false,
           show: false,
           done: false,
-          authState:false
+          authState:true
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -45,16 +46,24 @@ class Mentor extends Component {
       }));
     }
     addMembers(){
+      const self=this;
       console.log(document.getElementById("member").value);
       let member = document.getElementById("member").value;
       fetch('http://localhost:4000/mentee/add?member='+member,{
-        method:"post"
+        method:'POST',
+        credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            }
+          })
+      .then(function (response) {
+          return response.json();
       })
-      // .then(function (response) {
-      //     return response.json();
-      // })
       .then(response => {
           console.log(response);
+          self.setState({
+            authState:response.status 
+          });
       })
       .catch(function (err) {
           console.log('Fetch Error :-S', err);
@@ -126,16 +135,16 @@ class Mentor extends Component {
     }
 
     getUpdatedTask(){
-      debugger;
-      {(this.state.authState==false)? <Redirect to = {
-        {
-            pathname: "/" 
-        }}/>:this.setState({
-          show: true
-        })} 
-      // this.setState({
-      //   show: true
-      // });
+      // debugger;
+      // {(this.state.authState==false)? <Route render={() => <Redirect to = {
+      //   {
+      //       pathname: "/" 
+      //   }}/>}/>:this.setState({
+      //     show: true
+      //   })} 
+      this.setState({
+        show: true
+      });
     }
     handleComplete(){
       this.setState({
@@ -185,12 +194,21 @@ class Mentor extends Component {
       
     }
     render() {
+      // const {authState}=this.state.authState;
+      if(this.state.authState==false){
+        return <Redirect to = "/" />
+      }
       const { selectedOption } = this.state;
       return (
         <div className="container">
-        {this.state.logoutStatus ?  <Redirect to = 
-                         "/" 
-                       />:""} 
+           {/* this.setState({
+          show: true
+        }) */}
+
+        {this.state.logoutStatus ?  <Redirect to = {
+        {
+            pathname: "/" 
+        }}/>:""} 
           <div className="header"><span>Mentors Dashboard</span></div>
           <div className="mentorName"><span className="mentor-name">{this.props.match.params.user}</span></div>
           <button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button>

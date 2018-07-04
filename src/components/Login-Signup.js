@@ -113,8 +113,6 @@ class LoginSignup extends Component {
             //      })
             //  }
             //  else{
-
-             
             let logindata = {
                 username: this.state.loginEmail,
                 password: this.state.loginPassword,
@@ -282,7 +280,7 @@ class LoginSignup extends Component {
                 <input className = "signup-field" type = "text" onChange = {this.setSignupEmail} name = "email" placeholder = "E-mail" / >
                 </div>
 
-                <select onChange = {this.setSignupAs} name = "role" className = "signup-dropdown" >
+                <select onChange = {this.setSignupAs} name = "role" className = "signup-dropdown" required>
                 <option value = "Mentee" > I 'm a Mentee</option> 
                 <option value = "Mentor" > I 'm a Mentor</option> </select>
 

@@ -81,6 +81,7 @@ app.post('/signup', function (req, res) {
       email: req.body.email
     }, function (err, user) {
       if (err) {
+        
         res.send(err);
       }
       if (user) {
@@ -103,8 +104,9 @@ app.post('/signup', function (req, res) {
           console.log(new_user);
           UserDetails.insertMany(new_user, (err, user) => {
             if (err) {
+              console.log("inside signup err=",err.errmsg);
               res.send({
-                message: "please fill the form completely and then try registering!!"
+                message: err.errmsg
               });
             } else {
               console.log("inside success new_user is", new_user);
@@ -142,9 +144,9 @@ app.use(express.static("public"));
 app.use(session({
   secret: "cats",
   cookie: {
-    _expires: (100 * 60 * 1000)
+    _expires: (10 * 60 * 1000)
   },
-  resave: true,
+  resave: false,
   saveUninitialized: false
 }));
 const passport = require('passport');
@@ -173,7 +175,7 @@ app.use(passport.session());
 
 
 
-app.get('/error', (req, res) => res.redirect('/'));
+app.get('/error', (req, res) => res.send({message:"Incorrect username or password"}));
 
 // passport.serializeUser(function (user, cb) {
 //   // console.log('inside serializer user.id =',user.id);
@@ -228,18 +230,18 @@ app.get('/logout', function (req, res) {
     expires: new Date(1),
     path: '/'
   });
-  console.log("inside logout in if part cookie value", req.headers['cookie'])
+  console.log("inside logout in if part cookie value", req.headers['cookie']);
+  res.clearCookie("connect.sid", {
+    path: "/"
+  })
   req.logOut();
-  res.clearCookie('connect.sid', {
-    path: '/'
-  });
   res.send({
     status: true
   });
   // }
   // else{
   //   console.log("inside logout in else part cookie value",req.headers['cookie'])
-  //   res.send({status:false});
+  // res.send({status:false});
   //   // res.redirect('/');
   // }
 
@@ -316,7 +318,7 @@ app.post('/login',
     } else {
       res.send({
         // status: false
-        message:"You have registered as "+req.user.role+ " so please login as "+req.user.role
+        message: "You have registered as " + req.user.role + " so please login as " + req.user.role
       });
     }
 
@@ -417,12 +419,12 @@ app.get("/mentor/tasks", function (req, res) {
           else {
             // res.render("index.ejs" ,{todoList : todoList});
             // console.log(" inside mentor create task after success tasksList",tasksList); 
-            let trydata = JSON.stringify(tasksList);
+            // let trydata = JSON.stringify(tasksList);
             // trydata.push({status:true});
-            console.log(" inside mentor create task after success trydata", trydata);
+            // console.log(" inside mentor create task after success trydata", trydata);
 
-            res.send(trydata);
-            // res.send(tasksList);
+            // res.send(trydata);
+            res.send(tasksList);
             // console.log(tasksList);
           }
         });
@@ -430,7 +432,7 @@ app.get("/mentor/tasks", function (req, res) {
     });
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -468,7 +470,7 @@ app.get("/mentee/tasks", function (req, res) {
     })
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -505,7 +507,7 @@ app.get("/mentee/tasks/sub", function (req, res) {
     })
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -541,7 +543,7 @@ app.get("/mentee/tasks/complete", function (req, res) {
     });
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -576,7 +578,7 @@ app.get("/mentee/tasks/reassign", function (req, res) {
     });
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -618,7 +620,7 @@ app.post("/task/updatetask", function (req, res) {
     });
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 });
@@ -674,48 +676,31 @@ app.post("/mentee/add", function (req, res) {
           if (err) console.log(err);
           else {
             console.log("inserted " + newMember);
+            res.send({
+              status: true
+            });
           }
         });
       }
     });
   } else {
     res.send({
-      status: true
+      status: false
     });
   }
 
 });
 
 app.get("/addMembers", function (req, res) {
-  console.log("inside mentor create task req.query ", req.query);
-  // let user_id=req.session.passport.user;
-  console.log("inside mentor create task ", req.headers['cookie']);
-  if (req.headers['cookie'] != null) {
-    console.log("inside if block in mentor create task ", req.headers['cookie']);
 
-    let user_id = req.session.passport.user;
-    UserDetails.findOne({
-      _id: user_id
-    }, function (err, user) {
-      if (err) {
-        res.send(err);
-      } else {
-        members.find({}, function (err, membersList) {
-          if (err) console.log(err);
-          else {
-            // res.render("index.ejs" ,{todoList : todoList}); 
-            res.send(membersList);
-            // console.log(tasksList);
-          }
-        });
-      }
-    });
-  } else {
-    res.send({
-      status: true
-    });
-  }
-
+  members.find({}, function (err, membersList) {
+    if (err) console.log(err);
+    else {
+      // res.render("index.ejs" ,{todoList : todoList}); 
+      res.send(membersList);
+      // console.log(tasksList);
+    }
+  });
 });
 
 app.listen(4000, function () {
