@@ -108,3 +108,58 @@ input{
   vertical-align: top;
 }
 
+.teammembers {
+  margin-left: 400px;
+  margin-top: -9px;
+}
+
+.team-members {
+  border-style: unset;
+  background-color: white;
+  text-transform: capitalize;
+  border-radius: 65%;
+  text-align: center;
+  padding: 10px;
+  margin-right: 10px;
+  height: 13px;
+}
+
+.team-members-display {
+  display: inline-flex;
+  margin-left: 10px;
+}
+
+.addMembers-Btn {
+  font-weight: 900;
+  border-style: unset;
+  background-color: white;
+  color: green;
+  font-size: 22px;
+  border-radius: 65%;
+  text-align: center;
+  padding: 5px;
+  margin-right: 10px;
+  width: 33px;
+}
+
+.addMembers-Div {
+  width: auto;
+  z-index: 1;
+  position: absolute;
+  top: 53px;
+  background-color: #e2e4e6;
+  padding: 7px;
+  height: auto;
+  border-radius: 3px;
+  right: 154px;
+  border-style: solid;
+  border-color: darkgrey;
+}
+
+.team-more-members {
+  top: 9px;
+  position: relative;
+  color: white;
+  font-size: 18px;
+  font-variant-caps: all-petite-caps;
+}

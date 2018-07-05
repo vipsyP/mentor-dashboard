@@ -7,6 +7,8 @@ import ShowTasks from './ShowTasks';
 import SubmittedTasks from './SubmittedTasks';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import addUserImage from '../addUser.png';
+import deleteImage from '../delete.png';
 let teamMembers=[];
 
 // import LoginSignup from './Login-Signup'; 
@@ -22,7 +24,8 @@ class Mentor extends Component {
           delete: false,
           show: false,
           done: false,
-          authState:true
+          authState:true,
+          showAddTeam: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -45,7 +48,32 @@ class Mentor extends Component {
         delete: !prevState.delete
       }));
     }
+
+    addMembersBtn() {
+      this.setState({
+        showAddTeam: !this.state.showAddTeam
+      });
+    }
+  
+    // addMembers() {
+    //   console.log(document.getElementById("member").value);
+    //   let member = document.getElementById("member").value;
+    //   fetch('http://localhost:4000/mentee/add?member=' + member, {
+    //     method: "post"
+    //   }).then(response => {
+    //     console.log(response);
+    //   }).catch(function (err) {
+    //     console.log('Fetch Error :-S', err);
+    //   })
+    //   this.setState({
+    //     showAddTeam: !this.state.showAddTeam
+    //   });
+    // }
+  
     addMembers(){
+      // var popUp = document.getElementById("popUp")
+      // popUp.style.display = visible;
+      // document.getElementsByClassName("popUp");
       const self=this;
       console.log(document.getElementById("member").value);
       let member = document.getElementById("member").value;
@@ -68,6 +96,9 @@ class Mentor extends Component {
       .catch(function (err) {
           console.log('Fetch Error :-S', err);
       })
+      this.setState({
+            showAddTeam: !this.state.showAddTeam
+          });
     }
 
     logOut(event){
@@ -206,10 +237,36 @@ class Mentor extends Component {
         <div className="topBar">
         <span className = "mentorNameLabel">Mentor:</span><span className = "mentorName">{this.props.match.params.user}</span>
               <h1 className = "topBarHeading"> MyTeam </h1> 
-			  <div className = "placeholder" ></div>              
-			<div className = "addMembers" >
-				<input className = "memberName" id="member" type="text" placeholder="add member"/>
-            	<input className = "button addMember" type="button" value="Add Member" onClick={this.addMembers.bind(this)} />
+			  <div className = "placeholder" ></div>    
+        
+        <div className="addMembers" >
+            {/* <input className="addMembers-Btn" type="button" value="+" onClick={this.addMembersBtn.bind(this)} /> */}
+            <span className = "roundIcon" type="button"  onClick={this.addMembersBtn.bind(this)}>
+            <img className = "addUserIcon" src={addUserImage} alt="Smiley face"/>
+            </span>
+            {this.state.showAddTeam ?
+              <div className="addMembers-Div">
+                <input className="memberName" id="member" type="text" placeholder="add member" />
+                <input className="button addMember" type="button" value="Add Member" onClick={this.addMembers.bind(this)} />
+              </div> : ""
+            }
+            
+            <button className="logout-button" onClick={this.logOut} type="button"> Log Out</button>
+          </div>
+        </div>
+          
+			{/* <div className = "addMembers" >
+
+              <span className = "round-icon" type="button"  onClick={this.addMembers.bind(this)} >
+                <img className = "addUserIcon" src={addUserImage} alt="Smiley face"/>
+
+                <div className = "popUp">
+                  <input className = "memberName" id="member" type="text" placeholder="add member"/>
+            	    <input className = "button addMember" type="button" value="Add Member" onClick={this.addMembers.bind(this)} />
+                </div>
+              </span>
+
+
 				<button className="logout-button" onClick={this.logOut} type = "button"> Log Out</button> 
 		   </div> 
 
@@ -217,7 +274,7 @@ class Mentor extends Component {
               
 			  
 
-          </div>
+          </div> */}
         {this.state.logoutStatus ?  <Redirect to = {
                         {
                             pathname: "/" 
