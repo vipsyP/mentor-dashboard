@@ -120,11 +120,14 @@ class ShowTasks extends Component {
         var groups = {};
         for (var i = 0; i < res.length; i++) {
             {
+                if(res[i].mentor===this.props.mentor)
+                {
                 var groupName = res[i].member;
                 if (!groups[groupName]) {
                     groups[groupName] = [];
                 }
                 groups[groupName].push({ task: res[i].task, dueDate: res[i].dueDate, id: res[i]._id });
+            }
             }
         }
         let myArray = [];

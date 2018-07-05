@@ -16,6 +16,7 @@ class Mentor extends Component {
     constructor(props,{match}){
         super(props,{match});
         this.state={
+          mentor: '',
           add : false,
           mem:[],
           edit: false,
@@ -100,10 +101,12 @@ class Mentor extends Component {
        let date = document.getElementById("date").value
       //  console.log(document.getElementsByName("teamMember")[0].value);
        let member = document.getElementsByName("teamMember")[0].value;
+       let mentor = this.props.match.params.user;
        let data={
          task:task,
          date:date,
-         member:member
+         member:member,
+         mentor:mentor
        }
       //  fetch("http://localhost:4000/mentor/task/create?task="+task+'&date='+date+'&member='+member,{
         const self=this;
@@ -130,18 +133,9 @@ class Mentor extends Component {
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         })
-
-       
     }
 
     getUpdatedTask(){
-      // debugger;
-      // {(this.state.authState==false)? <Route render={() => <Redirect to = {
-      //   {
-      //       pathname: "/" 
-      //   }}/>}/>:this.setState({
-      //     show: true
-      //   })} 
       this.setState({
         show: true
       });
@@ -194,7 +188,6 @@ class Mentor extends Component {
       
     }
     render() {
-      // const {authState}=this.state.authState;
       if(this.state.authState==false){
         return <Redirect to = "/" />
       }
@@ -266,11 +259,12 @@ class Mentor extends Component {
 
             <div className="lists">
               <div className="tasksContainer">
-                  <ShowTasks func={this.handleadd} show={this.state.show} editFunc={this. handleEdit} deleteFunc={this.handleDelete} />
+                  <ShowTasks func={this.handleadd} show={this.state.show} editFunc={this. handleEdit} deleteFunc={this.handleDelete} 
+                  mentor={this.props.match.params.user}/>
 
               </div>
                 <div className="tasksContainer">
-                <SubmittedTasks func={this.handleComplete}/>
+                <SubmittedTasks func={this.handleComplete} mentor={this.props.match.params.user}/>
                 </div>
             </div>
             </div>

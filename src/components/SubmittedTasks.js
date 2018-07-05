@@ -44,7 +44,7 @@ class SubmittedTasks extends Component {
         // var taskList=[],members=[],date=[];
         var groups = {};
         for (var i = 0; i < res.length; i++) {
-            if(res[i].submitted && !res[i].done){
+            if(res[i].submitted && !res[i].done && res[i].mentor===this.props.mentor){
                 var groupName = res[i].member;
                 if (!groups[groupName]) {
                      groups[groupName] = [];

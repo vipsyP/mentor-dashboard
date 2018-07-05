@@ -38,6 +38,7 @@ app.use(function (req, res, next) {
 var mentorsDashboardSchema = new mongoose.Schema({
   task: String,
   member: String,
+  mentor: String,
   dueDate: String,
   submitted: Boolean,
   done: Boolean
@@ -360,9 +361,10 @@ app.post("/mentor/task/create", function (req, res) {
         var newTask = new tasks({
           task: req.body.task,
           member: req.body.member,
+          mentor: req.body.mentor,
           dueDate: req.body.date,
           submitted: false,
-          done: false
+          done: false,
         });
         tasks.create(newTask, function (err, tasks) {
           if (err) console.log(err);
@@ -382,23 +384,6 @@ app.post("/mentor/task/create", function (req, res) {
     });
   }
 });
-
-//     console.log('req.session.passport.user',req.session.passport.user);
-//   console.log('inside mentor create task',user_id);
-//     // var newTask = new tasks({
-//     //     task: req.body.taskName,
-//     //     member: req.body.teamMember,
-//     //     dueDate: req.body.date,
-//     //     submitted: false,
-//     //     done: false
-//     // });
-//     // tasks.create(newTask , function(err, tasks){
-//     //     if(err) console.log(err);
-//     //     else{
-//     //         // console.log("inserted "+ newTask);
-//     //     }
-//     // });
-// });
 
 app.get("/mentor/tasks", function (req, res) {
   console.log("inside mentor create task req.query ", req.query);
