@@ -609,6 +609,42 @@ app.post("/task/updatetask", function (req, res) {
     });
   }
 });
+app.post("/task/updateDate", function (req, res) {
+  console.log("inside edit date");
+  console.log("inside mentor create task req.query ", req.query);
+  // let user_id=req.session.passport.user;
+  console.log("inside mentor create task ", req.headers['cookie']);
+  if (req.headers['cookie'] != null) {
+    console.log("inside if block in mentor create task ", req.headers['cookie']);
+
+    let user_id = req.session.passport.user;
+    UserDetails.findOne({
+      _id: user_id
+    }, function (err, user) {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log(req.query);
+        tasks.update({
+          _id: req.query.id
+        }, {
+          $set: {
+           dueDate : req.query.date
+          }
+        }, function (err, result) {
+          if (err) {
+            res.send(err);
+          }
+          res.send(result);
+        });
+      }
+    });
+  } else {
+    res.send({
+      status: false
+    });
+  }
+});
 app.get("/task/deletetask", function (req, res) {
   console.log("inside /task/deletetask req.query ", req.query);
   // let user_id=req.session.passport.user;

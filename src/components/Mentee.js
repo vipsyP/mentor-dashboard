@@ -154,6 +154,7 @@ class Mentee extends Component {
                             </div>
 
                             <div className="dueDateContainer">
+                                <div>{item.mentor}</div>
                                 <div className="dueDate mentee">{item.dueDate}</div>
                             </div>
                         </div>

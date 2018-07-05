@@ -48,6 +48,36 @@ class ShowTasks extends Component {
             })
         this.props.handleEdit
     }
+    handleEditDate(e, id) {
+
+        const self=this;
+        console.log("inside edit date");
+        console.log("edittext text: "+e.currentTarget.innerText);
+
+        console.log(id);
+        let date = e.currentTarget.innerText
+            fetch('http://localhost:4000/task/updateDate?date='+date+'&id='+id,{
+                method: "POST",
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            } 
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(response => {
+                console.log(response);
+                this.fetchFunc();
+                self.setState({
+                    authState:response.status 
+                  });
+            }) 
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+            })
+        this.props.handleEdit
+    }
     handleDelete(id) {
         const self=this;
         console.log(id);
@@ -120,7 +150,7 @@ class ShowTasks extends Component {
         var groups = {};
         for (var i = 0; i < res.length; i++) {
             {
-                if(res[i].mentor===this.props.mentor)
+                if(res[i].mentor===this.props.mentor && !res[i].done)
                 {
                 var groupName = res[i].member;
                 if (!groups[groupName]) {
@@ -171,7 +201,8 @@ class ShowTasks extends Component {
                                                 <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
                                             </div>
                                             <div className="dueDateContainer">
-                                                <span className="dueDate mentor">Due date: {val.dueDate}</span>
+                                                <span>Due date</span>
+                                                <span className="dueDate mentor" contenteditable="true" onBlur={(e) => this.handleEditDate(e, val.id)} >{val.dueDate}</span>
                                             </div>
                                         </div>
 
