@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditForm from './EditForm';
 import { Link, Redirect } from 'react-router-dom';
-import logo from '../delete.png';
+import deleteImage from '../delete.png';
 
 class ShowTasks extends Component {
     constructor(props) {
@@ -198,7 +198,7 @@ class ShowTasks extends Component {
 
                                         <div className = "verticalContainer">
                                             <div className="deleteContainer">
-                                                <img className = "delete" src={logo} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
+                                                <img className = "delete" src={deleteImage} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
                                             </div>
                                             <div className="dueDateContainer">
                                                 <span>Due date</span>
