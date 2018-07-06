@@ -192,7 +192,7 @@ class ShowTasks extends Component {
 
                                         <div className = "task mentor assigned">
                                             
-                                            <div className="taskNameContainer mentor submitted">
+                                            <div className="taskNameContainer mentor">
                                                 <p contenteditable="true" onBlur={(e) => this.handleEdit(e, val.id)}>{val.task}</p>
                                             </div>
 
@@ -201,7 +201,7 @@ class ShowTasks extends Component {
                                                 <img className = "delete" src={deleteImage} alt="Smiley face" onClick={this.handleDelete.bind(this, val.id)}/>
                                             </div>
                                             <div className="dueDateContainer">
-                                                <span>Due date</span>
+                                                <span className="dueDate mentor">Due date:&nbsp;</span>
                                                 <span className="dueDate mentor" contenteditable="true" onBlur={(e) => this.handleEditDate(e, val.id)} >{val.dueDate}</span>
                                             </div>
                                         </div>

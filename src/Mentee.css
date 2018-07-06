@@ -57,11 +57,27 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
+  } */
 
   .menteeTaskName {
       color: gray;
-  } */
+      text-transform: capitalize;
+      color: #444;
+  }
+
+.taskNameContainer.mentee{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0px;
+
+}
+
+.assignedBy {
+    margin-top: 0px;
+    color: #8c8c8c;
+    font-size: 12px;
+}
 
 .dueDateContainer {
     display: flex;

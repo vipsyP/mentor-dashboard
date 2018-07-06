@@ -145,6 +145,7 @@ class Mentee extends Component {
 
                             <div class="taskNameContainer mentee">
                                 <div className="menteeTaskName">{item.task}</div>
+                                <div className="assignedBy">Assigned by: {item.mentor}</div>
                             </div>
 
 
@@ -154,7 +155,7 @@ class Mentee extends Component {
                             </div>
 
                             <div className="dueDateContainer">
-                                <div>{item.mentor}</div>
+
                                 <div className="dueDate mentee">{item.dueDate}</div>
                             </div>
                         </div>
